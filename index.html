@@ -126,6 +126,20 @@ button.option.good, button.option.bad { opacity: 1; }
   .memory-card { min-height: 61px; font-size: 13px; }
 }
 
+.duel-results { margin: 18px 0; }
+.duel-results h3 { margin: 0 0 4px; }
+.duel-results p { margin: 0 0 10px; }
+.duel-results table { width: 100%; table-layout: fixed; border-spacing: 5px; text-align: left; }
+.duel-results th:first-child { width: 19%; }
+.duel-results th, .duel-results td { padding: 7px; overflow-wrap: anywhere; }
+.duel-results td { border-radius: 9px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.duel-results td span { display: block; margin-top: 3px; font-weight: 500; }
+.duel-results .duel-win { background: #e0f3e9; color: #14583e; }
+.duel-results .duel-loss { background: #fbe8e8; color: #892f3a; }
+.duel-results .duel-tie { background: #eef2f5; color: #344656; }
+.duel-panel details { margin: 12px 0; }
+.duel-panel summary { cursor: pointer; }
+
 </style>
 
 </head>
@@ -146,8 +160,8 @@ button.option.good, button.option.bad { opacity: 1; }
   </div>
 </header>
 <main>
-  <section id="class-7F" aria-labelledby="tab-7F"><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="7F-unit"><option value="all" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Tous les volets">Unité 1 · Tous les volets</option><option value="1" data-de="Volet 1" data-fr="Volet 1">Volet 1</option><option value="2" data-de="Volet 2" data-fr="Volet 2">Volet 2</option><option value="3" data-de="Volet 3" data-fr="Volet 3">Volet 3</option></select></label><label data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction<select id="7F-direction"><option value="fr" data-de="Französisch → Deutsch" data-fr="Français → allemand">Français → allemand</option><option value="de" data-de="Deutsch → Französisch" data-fr="Allemand → français">Allemand → français</option><option value="mix" data-de="Gemischt" data-fr="Aléatoire">Aléatoire</option></select></label></div><div class="modes" id="7F-modes"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="type" aria-pressed="false" data-de="Eintippen" data-fr="Écrire la réponse">Écrire la réponse</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button></div><div class="toolbar"><label class="checkbox"><input type="checkbox" id="7F-missed"><span id="7F-missed-label" data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span></label><button class="secondary" id="7F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="7F-count"></p></section><section class="panel hidden" id="7F-status" aria-live="polite"></section><section class="panel" id="7F-game"><div class="meta"><span id="7F-counter"></span><span id="7F-score"></span></div><div id="7F-chrono-info" class="meta hidden"><strong id="7F-chrono-time"></strong><strong id="7F-chrono-points"></strong></div><div class="progress"><div id="7F-bar"></div></div><div class="prompt"><span id="7F-promptlabel"></span><strong id="7F-prompt"></strong></div><div id="7F-choices"></div><div id="7F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="7F-typing" class="answer hidden"><input id="7F-typed" data-aria-de="Übersetzung eingeben" data-aria-fr="Saisis la traduction" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Saisis la traduction" data-placeholder-de="Übersetzung eingeben" data-placeholder-fr="Saisis la traduction"><button id="7F-submit" data-de="Prüfen" data-fr="Vérifier">Vérifier</button></div><div id="7F-cardactions" class="answer hidden"><button id="7F-reveal" data-de="Antwort aufdecken" data-fr="Afficher la réponse">Afficher la réponse</button><button id="7F-known" class="secondary hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="7F-unknown" class="secondary hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div><div class="feedback" id="7F-feedback" aria-live="polite"></div><button id="7F-accept" class="secondary hidden" type="button" data-de="Meine Antwort als richtig werten ✓" data-fr="Accepter ma réponse ✓">Accepter ma réponse ✓</button> <button id="7F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
-  <section id="class-9F" aria-labelledby="tab-9F" hidden><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="9F-unit"><option value="all" data-de="Unités 1–3 · Gesamter Wortschatz" data-fr="Unités 1–3 · Tout le vocabulaire">Unités 1–3 · Tout le vocabulaire</option><option value="1" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Toutes les parties">Unité 1 · Toutes les parties</option><option value="1a" data-de="Unité 1 · Auftaktseite" data-fr="Unité 1 · Page d’ouverture">Unité 1 · Page d’ouverture</option><option value="1t" data-de="Unité 1 · Themenwortschatz" data-fr="Unité 1 · Vocabulaire thématique">Unité 1 · Vocabulaire thématique</option><option value="1v1" data-de="Unité 1 · Volet 1" data-fr="Unité 1 · Volet 1">Unité 1 · Volet 1</option><option value="1v2" data-de="Unité 1 · Volet 2" data-fr="Unité 1 · Volet 2">Unité 1 · Volet 2</option><option value="2" data-de="Unité 2 · Alle Abschnitte" data-fr="Unité 2 · Toutes les parties">Unité 2 · Toutes les parties</option><option value="2a" data-de="Unité 2 · Auftaktseite" data-fr="Unité 2 · Page d’ouverture">Unité 2 · Page d’ouverture</option><option value="2t" data-de="Unité 2 · Themenwortschatz" data-fr="Unité 2 · Vocabulaire thématique">Unité 2 · Vocabulaire thématique</option><option value="2v1" data-de="Unité 2 · Volet 1" data-fr="Unité 2 · Volet 1">Unité 2 · Volet 1</option><option value="2v2" data-de="Unité 2 · Volet 2" data-fr="Unité 2 · Volet 2">Unité 2 · Volet 2</option><option value="3" data-de="Unité 3 · Alle Abschnitte" data-fr="Unité 3 · Toutes les parties">Unité 3 · Toutes les parties</option><option value="3a" data-de="Unité 3 · Auftaktseite" data-fr="Unité 3 · Page d’ouverture">Unité 3 · Page d’ouverture</option><option value="3t" data-de="Unité 3 · Themenwortschatz" data-fr="Unité 3 · Vocabulaire thématique">Unité 3 · Vocabulaire thématique</option><option value="3v1" data-de="Unité 3 · Volet 1" data-fr="Unité 3 · Volet 1">Unité 3 · Volet 1</option><option value="3v2" data-de="Unité 3 · Volet 2" data-fr="Unité 3 · Volet 2">Unité 3 · Volet 2</option></select></label><label data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction<select id="9F-direction"><option value="fr" data-de="Französisch → Deutsch" data-fr="Français → allemand">Français → allemand</option><option value="de" data-de="Deutsch → Französisch" data-fr="Allemand → français">Allemand → français</option><option value="mix" data-de="Gemischt" data-fr="Aléatoire">Aléatoire</option></select></label></div><div class="modes" id="9F-modes"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="type" aria-pressed="false" data-de="Eintippen" data-fr="Écrire la réponse">Écrire la réponse</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button></div><div class="toolbar"><label class="checkbox"><input type="checkbox" id="9F-missed"><span data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span></label><button class="secondary" id="9F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="9F-count"></p></section><section class="panel hidden" id="9F-status" aria-live="polite"></section><section class="panel" id="9F-game"><div class="meta"><span id="9F-counter"></span><span id="9F-score"></span></div><div id="9F-chrono-info" class="meta hidden"><strong id="9F-chrono-time"></strong><strong id="9F-chrono-points"></strong></div><div class="progress"><div id="9F-bar"></div></div><div class="prompt"><span id="9F-promptlabel"></span><strong id="9F-prompt"></strong></div><div id="9F-choices"></div><div id="9F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="9F-typing" class="answer hidden"><input id="9F-typed" data-aria-de="Übersetzung eingeben" data-aria-fr="Saisis la traduction" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Saisis la traduction" data-placeholder-de="Übersetzung eingeben" data-placeholder-fr="Saisis la traduction"><button id="9F-submit" data-de="Prüfen" data-fr="Vérifier">Vérifier</button></div><div id="9F-cardactions" class="answer hidden"><button id="9F-reveal" data-de="Antwort aufdecken" data-fr="Afficher la réponse">Afficher la réponse</button><button id="9F-known" class="secondary hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="9F-unknown" class="secondary hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div><div class="feedback" id="9F-feedback" aria-live="polite"></div><button id="9F-accept" class="secondary hidden" type="button" data-de="Meine Antwort als richtig werten ✓" data-fr="Accepter ma réponse ✓">Accepter ma réponse ✓</button> <button id="9F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
+  <section id="class-7F" aria-labelledby="tab-7F"><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="7F-unit"><option value="all" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Tous les volets">Unité 1 · Tous les volets</option><option value="1" data-de="Volet 1" data-fr="Volet 1">Volet 1</option><option value="2" data-de="Volet 2" data-fr="Volet 2">Volet 2</option><option value="3" data-de="Volet 3" data-fr="Volet 3">Volet 3</option></select></label><label data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction<select id="7F-direction"><option value="fr" data-de="Französisch → Deutsch" data-fr="Français → allemand">Français → allemand</option><option value="de" data-de="Deutsch → Französisch" data-fr="Allemand → français">Allemand → français</option><option value="mix" data-de="Gemischt" data-fr="Aléatoire">Aléatoire</option></select></label></div><div class="modes" id="7F-modes"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="type" aria-pressed="false" data-de="Eintippen" data-fr="Écrire la réponse">Écrire la réponse</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button></div><div class="toolbar"><label class="checkbox"><input type="checkbox" id="7F-missed"><span id="7F-missed-label" data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span></label><button class="secondary" id="7F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="7F-count"></p></section><section class="panel duel-panel" id="7F-duel" hidden></section><section class="panel hidden" id="7F-status" aria-live="polite"></section><section class="panel" id="7F-game"><div class="meta"><span id="7F-counter"></span><span id="7F-score"></span><strong id="7F-memory-time" class="hidden" role="timer" aria-live="off"></strong></div><div id="7F-chrono-info" class="meta hidden"><strong id="7F-chrono-time"></strong><strong id="7F-chrono-points"></strong></div><div class="progress"><div id="7F-bar"></div></div><div class="prompt"><span id="7F-promptlabel"></span><strong id="7F-prompt"></strong></div><div id="7F-choices"></div><div id="7F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="7F-typing" class="answer hidden"><input id="7F-typed" data-aria-de="Übersetzung eingeben" data-aria-fr="Saisis la traduction" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Saisis la traduction" data-placeholder-de="Übersetzung eingeben" data-placeholder-fr="Saisis la traduction"><button id="7F-submit" data-de="Prüfen" data-fr="Vérifier">Vérifier</button></div><div id="7F-cardactions" class="answer hidden"><button id="7F-reveal" data-de="Antwort aufdecken" data-fr="Afficher la réponse">Afficher la réponse</button><button id="7F-known" class="secondary hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="7F-unknown" class="secondary hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div><div class="feedback" id="7F-feedback" aria-live="polite"></div><button id="7F-accept" class="secondary hidden" type="button" data-de="Meine Antwort als richtig werten ✓" data-fr="Accepter ma réponse ✓">Accepter ma réponse ✓</button> <button id="7F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
+  <section id="class-9F" aria-labelledby="tab-9F" hidden><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="9F-unit"><option value="all" data-de="Unités 1–3 · Gesamter Wortschatz" data-fr="Unités 1–3 · Tout le vocabulaire">Unités 1–3 · Tout le vocabulaire</option><option value="1" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Toutes les parties">Unité 1 · Toutes les parties</option><option value="1a" data-de="Unité 1 · Auftaktseite" data-fr="Unité 1 · Page d’ouverture">Unité 1 · Page d’ouverture</option><option value="1t" data-de="Unité 1 · Themenwortschatz" data-fr="Unité 1 · Vocabulaire thématique">Unité 1 · Vocabulaire thématique</option><option value="1v1" data-de="Unité 1 · Volet 1" data-fr="Unité 1 · Volet 1">Unité 1 · Volet 1</option><option value="1v2" data-de="Unité 1 · Volet 2" data-fr="Unité 1 · Volet 2">Unité 1 · Volet 2</option><option value="2" data-de="Unité 2 · Alle Abschnitte" data-fr="Unité 2 · Toutes les parties">Unité 2 · Toutes les parties</option><option value="2a" data-de="Unité 2 · Auftaktseite" data-fr="Unité 2 · Page d’ouverture">Unité 2 · Page d’ouverture</option><option value="2t" data-de="Unité 2 · Themenwortschatz" data-fr="Unité 2 · Vocabulaire thématique">Unité 2 · Vocabulaire thématique</option><option value="2v1" data-de="Unité 2 · Volet 1" data-fr="Unité 2 · Volet 1">Unité 2 · Volet 1</option><option value="2v2" data-de="Unité 2 · Volet 2" data-fr="Unité 2 · Volet 2">Unité 2 · Volet 2</option><option value="3" data-de="Unité 3 · Alle Abschnitte" data-fr="Unité 3 · Toutes les parties">Unité 3 · Toutes les parties</option><option value="3a" data-de="Unité 3 · Auftaktseite" data-fr="Unité 3 · Page d’ouverture">Unité 3 · Page d’ouverture</option><option value="3t" data-de="Unité 3 · Themenwortschatz" data-fr="Unité 3 · Vocabulaire thématique">Unité 3 · Vocabulaire thématique</option><option value="3v1" data-de="Unité 3 · Volet 1" data-fr="Unité 3 · Volet 1">Unité 3 · Volet 1</option><option value="3v2" data-de="Unité 3 · Volet 2" data-fr="Unité 3 · Volet 2">Unité 3 · Volet 2</option></select></label><label data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction<select id="9F-direction"><option value="fr" data-de="Französisch → Deutsch" data-fr="Français → allemand">Français → allemand</option><option value="de" data-de="Deutsch → Französisch" data-fr="Allemand → français">Allemand → français</option><option value="mix" data-de="Gemischt" data-fr="Aléatoire">Aléatoire</option></select></label></div><div class="modes" id="9F-modes"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="type" aria-pressed="false" data-de="Eintippen" data-fr="Écrire la réponse">Écrire la réponse</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button></div><div class="toolbar"><label class="checkbox"><input type="checkbox" id="9F-missed"><span data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span></label><button class="secondary" id="9F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="9F-count"></p></section><section class="panel duel-panel" id="9F-duel" hidden></section><section class="panel hidden" id="9F-status" aria-live="polite"></section><section class="panel" id="9F-game"><div class="meta"><span id="9F-counter"></span><span id="9F-score"></span><strong id="9F-memory-time" class="hidden" role="timer" aria-live="off"></strong></div><div id="9F-chrono-info" class="meta hidden"><strong id="9F-chrono-time"></strong><strong id="9F-chrono-points"></strong></div><div class="progress"><div id="9F-bar"></div></div><div class="prompt"><span id="9F-promptlabel"></span><strong id="9F-prompt"></strong></div><div id="9F-choices"></div><div id="9F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="9F-typing" class="answer hidden"><input id="9F-typed" data-aria-de="Übersetzung eingeben" data-aria-fr="Saisis la traduction" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Saisis la traduction" data-placeholder-de="Übersetzung eingeben" data-placeholder-fr="Saisis la traduction"><button id="9F-submit" data-de="Prüfen" data-fr="Vérifier">Vérifier</button></div><div id="9F-cardactions" class="answer hidden"><button id="9F-reveal" data-de="Antwort aufdecken" data-fr="Afficher la réponse">Afficher la réponse</button><button id="9F-known" class="secondary hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="9F-unknown" class="secondary hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div><div class="feedback" id="9F-feedback" aria-live="polite"></div><button id="9F-accept" class="secondary hidden" type="button" data-de="Meine Antwort als richtig werten ✓" data-fr="Accepter ma réponse ✓">Accepter ma réponse ✓</button> <button id="9F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
   <p class="footer" data-de="Dein Fortschritt gilt für diese Sitzung." data-fr="Ta progression est conservée pendant cette session.">Ta progression est conservée pendant cette session.</p>
 </main>
 <footer class="mini-impressum">Krämer · Kurpfalz-Internat · Diersteinstraße 1–7 · 69245 Bammental</footer>
@@ -160,18 +174,46 @@ function createTrainer(group,vocab) {
 const root=document.getElementById('class-'+group);
 const $=id=>document.getElementById(group+"-"+id), shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let mode='choice',deck=[],pos=0,correct=0,missed=new Set(),answered=false,reverse=false;
-let sessionStart=new Date(),sessionEnd=null,sessionCounts={choice:0,type:0,cards:0,challenge:0,memory:0},sessionWords=new Set(),sessionCorrections=0;
+let sessionStart=new Date(),sessionEnd=null,sessionCounts={choice:0,type:0,cards:0,challenge:0,memory:0,duel:0},sessionWords=new Set(),sessionCorrections=0;
 
-const modeLabels=()=>({choice:tr('Multiple Choice','QCM'),type:tr('Eintippen','Écrire la réponse'),cards:tr('Karteikarten','Cartes mémoire'),challenge:tr('Zeit-Challenge','Défi chrono'),memory:tr('Vokabel-Memory','Jeu de mémoire')});
+const modeLabels=()=>({choice:tr('Multiple Choice','QCM'),type:tr('Eintippen','Écrire la réponse'),cards:tr('Karteikarten','Cartes mémoire'),challenge:tr('Zeit-Challenge','Défi chrono'),memory:tr('Vokabel-Memory','Jeu de mémoire'),duel:tr('Vokabelduell','Duel de vocabulaire')});
 let feedbackKind = '', chronoEnded = false, memoryFinishedAt = 0;
+let memoryRecord = null;
+let chronoRecord = null;
 
 let chronoTimer=null,chronoDeadline=0,chronoPoints=0,chronoStreak=0,chronoBest=0,chronoAttempted=0,chronoToken=0;
 function stopChrono(){if(chronoTimer!==null){clearInterval(chronoTimer);chronoTimer=null}chronoToken++}
 function updateChrono(expire=true){let remaining=Math.max(0,Math.ceil((chronoDeadline-Date.now())/1000));setText('chrono-time',tr(`Zeit: ${remaining} s`,`Temps : ${remaining} s`));setText('chrono-points',tr(`${chronoPoints} Punkte · Serie ${chronoStreak}`,`${chronoPoints} points · série ${chronoStreak}`));if(remaining===0&&expire)endChrono()}
 function beginChrono(){stopChrono();chronoPoints=0;chronoStreak=0;chronoBest=0;chronoAttempted=0;chronoDeadline=Date.now()+60000;chronoTimer=setInterval(updateChrono,150);updateChrono()}
-function endChrono(){if(mode!=='challenge'||sessionEnd)return;stopChrono();chronoEnded=true;$('game').classList.add('hidden');let status=$('status');status.classList.remove('hidden');status.replaceChildren();let h=document.createElement('h2');h.textContent=tr('Zeit abgelaufen!','Temps écoulé !');let p=document.createElement('p');p.textContent=tr(`${chronoPoints} Punkte · ${correct} von ${chronoAttempted} richtig · Trefferquote ${chronoAttempted?Math.round(100*correct/chronoAttempted):0} % · längste Serie ${chronoBest}`,`${chronoPoints} points · ${correct} bonnes réponses sur ${chronoAttempted} · réussite ${chronoAttempted?Math.round(100*correct/chronoAttempted):0} % · meilleure série ${chronoBest}`);let b=document.createElement('button');b.textContent=tr('Erneut 60 Sekunden spielen','Rejouer 60 secondes');b.onclick=start;status.append(h,p,b)}
+function endChrono(){
+ if (mode !== 'challenge' || sessionEnd || chronoEnded) return;
+ stopChrono();
+ chronoEnded = true;
+ if (chronoAttempted > 0 && (
+  !chronoRecord || chronoPoints > chronoRecord.points ||
+  (chronoPoints === chronoRecord.points && (
+   correct > chronoRecord.correct ||
+   (correct === chronoRecord.correct && chronoBest > chronoRecord.streak)
+  ))
+ )) {
+  chronoRecord = {points: chronoPoints, correct, streak: chronoBest};
+ }
+ renderChronoResult();
+}
+function renderChronoResult(){$('game').classList.add('hidden');let status=$('status');status.classList.remove('hidden');status.replaceChildren();let h=document.createElement('h2');h.textContent=tr('Zeit abgelaufen!','Temps écoulé !');let p=document.createElement('p');p.textContent=tr(`${chronoPoints} Punkte · ${correct} von ${chronoAttempted} richtig · Trefferquote ${chronoAttempted?Math.round(100*correct/chronoAttempted):0} % · längste Serie ${chronoBest}`,`${chronoPoints} points · ${correct} bonnes réponses sur ${chronoAttempted} · réussite ${chronoAttempted?Math.round(100*correct/chronoAttempted):0} % · meilleure série ${chronoBest}`);let b=document.createElement('button');b.textContent=tr('Erneut 60 Sekunden spielen','Rejouer 60 secondes');b.onclick=start;status.append(h,p,b)}
 let memoryCards=[],memoryOpen=[],memoryMatched=new Set(),memoryAttempts=0,memoryPairs=0,memoryStarted=0,memoryLock=false,memoryRound=0;
+let memoryTimer = null;
+function stopMemoryTimer() {
+ if (memoryTimer !== null) clearInterval(memoryTimer);
+ memoryTimer = null;
+}
+function updateMemoryTimer() {
+ const elapsed = (memoryFinishedAt || Date.now()) - memoryStarted;
+ const seconds = (elapsed / 1000).toLocaleString(language, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+ setText('memory-time', tr(`Zeit: ${seconds} s`, `Temps : ${seconds} s`));
+}
 function initMemory(){
+ stopMemoryTimer();
  memoryRound++;memoryOpen=[];memoryMatched.clear();memoryAttempts=0;memoryLock=false;
  // Unique spellings on both sides prevent ambiguous matching.
  const seenFr=new Set(),seenDe=new Set(),chosen=[];
@@ -183,6 +225,7 @@ function initMemory(){
  memoryPairs=chosen.length;memoryStarted=Date.now();memoryFinishedAt=0;
  memoryCards=shuffle(chosen.flatMap(w=>[{id:w.id,side:'fr',value:w.fr},{id:w.id,side:'de',value:w.de}]));
  renderMemory();
+ if (memoryPairs) memoryTimer = setInterval(updateMemoryTimer, 100);
 }
 function renderMemory(){
  if(mode!=='memory'||sessionEnd)return;
@@ -192,6 +235,8 @@ function renderMemory(){
  status.classList.add('hidden');game.classList.remove('hidden');
  $('choices').classList.add('hidden');$('typing').classList.add('hidden');$('cardactions').classList.add('hidden');$('accept').classList.add('hidden');$('next').classList.add('hidden');
  $('memory-board').classList.remove('hidden');
+ $('memory-time').classList.remove('hidden');
+ updateMemoryTimer();
  $('promptlabel').textContent=tr('Finde die französisch-deutschen Paare','Retrouve les paires français–allemand');
  $('prompt').lang=language;
  $('prompt').textContent=tr('Vokabel-Memory','Jeu de mémoire');
@@ -208,7 +253,6 @@ function renderMemory(){
   b.onclick=()=>flipMemory(i);board.append(b);
  });
  if(memoryMatched.size===memoryPairs){
-  memoryFinishedAt ||= Date.now();
   const seconds=Math.round((memoryFinishedAt-memoryStarted)/1000);
   $('feedback').textContent=tr(`Geschafft! ${memoryPairs} Paare in ${memoryAttempts} Versuchen und ${seconds} Sekunden.`,`Bravo ! ${memoryPairs} paires en ${memoryAttempts} essais et ${seconds} secondes.`);
   $('feedback').className='feedback success';
@@ -223,6 +267,15 @@ function flipMemory(i){
  const [a,b]=memoryOpen.map(x=>memoryCards[x]);
  if(a.id===b.id&&a.side!==b.side){
   memoryMatched.add(a.id);sessionCounts.memory++;sessionWords.add(a.id);correct++;
+  if (memoryMatched.size === memoryPairs) {
+   memoryFinishedAt = Date.now();
+   stopMemoryTimer();
+   const elapsedMs = memoryFinishedAt - memoryStarted;
+   if (!memoryRecord || elapsedMs < memoryRecord.elapsedMs ||
+       (elapsedMs === memoryRecord.elapsedMs && memoryAttempts < memoryRecord.attempts)) {
+    memoryRecord = {elapsedMs, attempts: memoryAttempts, pairs: memoryPairs};
+   }
+  }
   missed.delete(a.id);memoryOpen=[];renderMemory();
  }else{
   memoryLock=true;renderMemory();
@@ -230,6 +283,200 @@ function flipMemory(i){
   setTimeout(()=>{if(mode!=='memory'||sessionEnd||round!==memoryRound)return;memoryOpen=[];memoryLock=false;renderMemory()},1100);
  }
 }
+let duel = null;
+const duelHistory = [];
+
+function playerName(index) {
+ return tr(`Spieler ${index + 1}`, `Joueur ${index + 1}`);
+}
+
+function duelTime(tenths) {
+ return `${(tenths / 10).toLocaleString(language, {minimumFractionDigits: 1})} s`;
+}
+
+function initDuel() {
+ const questions = deck.slice(0, 10).map(word => {
+  const direction = $('direction').value;
+  const toFrench = direction === 'de' || (direction === 'mix' && Math.random() < 0.5);
+  const source = toFrench ? 'de' : 'fr';
+  const target = toFrench ? 'fr' : 'de';
+  const question = word[source];
+  const answer = word[target];
+  const normalizedQuestion = norm(question);
+  const acceptable = new Set(vocab
+   .filter(entry => norm(entry[source]) === normalizedQuestion)
+   .flatMap(entry => alternatives(entry[target])));
+  const choices = [answer];
+  for (const entry of [...shuffle(vocab.filter(entry => entry.unit === word.unit)), ...shuffle(vocab)]) {
+   const option = entry[target];
+   const meanings = alternatives(option);
+   if (meanings.some(meaning => acceptable.has(meaning))) continue;
+   choices.push(option);
+   meanings.forEach(meaning => acceptable.add(meaning));
+   if (choices.length === 4) break;
+  }
+  return {id: word.id, question, answer, source, choices};
+ });
+ const secondOrder = shuffle(questions);
+ if (questions.length > 1 && secondOrder.every((word, i) => word === questions[i])) {
+  secondOrder.push(secondOrder.shift());
+ }
+ duel = {turns: [questions, secondOrder].map(questions => ({questions, options: questions.map(question => shuffle(question.choices)), answers: [], correct: 0})), player: 0, phase: 'ready'};
+ renderDuel();
+}
+
+function duelOutcome(result, index) {
+ if (result.winner === null) return tr('Unentschieden', 'Égalité');
+ if (result.winner !== index) return tr('Niederlage', 'Défaite');
+ return result.byTime ? tr('Sieg nach Zeit', 'Victoire au temps') : tr('Sieg nach Treffern', 'Victoire aux bonnes réponses');
+}
+
+function renderDuelRounds(results, firstRound = 1) {
+ const section = document.createElement('section');
+ section.className = 'duel-results';
+ const heading = document.createElement('h3');
+ heading.textContent = tr('Vokabelduell · Rundenübersicht', 'Duel de vocabulaire · Résultats des manches');
+ const totals = document.createElement('p');
+ totals.textContent = [0, 1].map(i => {
+  const wins = results.filter(result => result.winner === i).length;
+  return `${playerName(i)} · ${tr(`${wins} ${wins === 1 ? 'Sieg' : 'Siege'}`, `${wins} ${wins === 1 ? 'victoire' : 'victoires'}`)}`;
+ }).join('  |  ');
+ const table = document.createElement('table');
+ table.setAttribute('aria-label', heading.textContent);
+ const head = table.createTHead().insertRow();
+ for (const title of [tr('Runde', 'Manche'), playerName(0), playerName(1)]) {
+  const cell = document.createElement('th');
+  cell.scope = 'col';
+  cell.textContent = title;
+  head.append(cell);
+ }
+ const body = table.createTBody();
+ results.forEach((result, round) => {
+  const row = body.insertRow();
+  const number = document.createElement('th');
+  number.scope = 'row';
+  number.textContent = firstRound + round;
+  row.append(number);
+  result.turns.forEach((turn, i) => {
+   const cell = row.insertCell();
+   cell.className = result.winner === null ? 'duel-tie' : result.winner === i ? 'duel-win' : 'duel-loss';
+   const outcome = document.createElement('span');
+   outcome.textContent = duelOutcome(result, i);
+   cell.append(`${turn.correct}/${turn.questions.length} · ${duelTime(turn.time)}`, outcome);
+  });
+ });
+ section.append(heading, totals, table);
+ return section;
+}
+
+function renderDuel() {
+ const panel = $('duel');
+ panel.replaceChildren();
+ panel.hidden = false;
+ $('game').classList.add('hidden');
+ $('status').classList.add('hidden');
+ const heading = document.createElement('h2');
+ heading.textContent = modeLabels().duel;
+ panel.append(heading);
+
+ const turn = duel.turns[duel.player];
+ if (!turn.questions.length) {
+  const empty = document.createElement('p');
+  empty.textContent = tr('Keine Vokabeln in dieser Auswahl.', 'Aucun mot dans cette sélection.');
+  panel.append(empty);
+  return;
+ }
+ if (duel.phase === 'done') {
+  panel.append(renderDuelRounds([duelHistory.at(-1)], duelHistory.length));
+  const errors = new Map();
+  for (const played of duel.turns) {
+   played.questions.forEach((question, i) => {
+    if (!played.answers[i]) errors.set(question.id, question);
+   });
+  }
+  if (errors.size) {
+   const review = document.createElement('details');
+   const summary = document.createElement('summary');
+   summary.textContent = tr('Fehler gemeinsam wiederholen', 'Revoir les erreurs ensemble');
+   const list = document.createElement('ul');
+   for (const question of errors.values()) {
+    const item = document.createElement('li');
+    item.textContent = `${question.question} → ${question.answer}`;
+    list.append(item);
+   }
+   review.append(summary, list);
+   panel.append(review);
+  }
+  const restart = document.createElement('button');
+  restart.textContent = tr('Neues Duell', 'Nouveau duel');
+  restart.onclick = initDuel;
+  panel.append(restart);
+  return;
+ }
+
+ const instruction = document.createElement('p');
+ panel.append(instruction);
+ if (duel.phase === 'ready') {
+  instruction.textContent = duel.player === 0
+   ? tr(`Spieler 1 beginnt. Beide wählen nacheinander die passende Übersetzung für dieselben ${turn.questions.length} Vokabeln. Die Lösungen erscheinen nach beiden Durchgängen.`, `Le joueur 1 commence. Les deux joueurs choisissent la bonne traduction pour les mêmes mots (${turn.questions.length}), chacun à son tour. Les solutions s’affichent à la fin.`)
+   : tr('Gib das Gerät an Spieler 2 weiter.', 'Passe l’appareil au joueur 2.');
+  const begin = document.createElement('button');
+  begin.textContent = tr(`${playerName(duel.player)} startet`, `${playerName(duel.player)} commence`);
+  begin.onclick = () => {
+   turn.started = performance.now();
+   duel.phase = 'playing';
+   renderDuel();
+  };
+  panel.append(begin);
+  return;
+ }
+
+ const question = turn.questions[turn.answers.length];
+ instruction.textContent = `${playerName(duel.player)} · ${tr('Vokabel', 'Mot')} ${turn.answers.length + 1}/${turn.questions.length}`;
+ const prompt = document.createElement('div');
+ prompt.className = 'prompt';
+ const direction = document.createElement('span');
+ direction.textContent = question.source === 'fr' ? tr('Übersetze ins Deutsche', 'Traduis en allemand') : tr('Übersetze ins Französische', 'Traduis en français');
+ const word = document.createElement('strong');
+ word.lang = question.source;
+ word.textContent = question.question;
+ prompt.append(direction, word);
+ const choices = document.createElement('div');
+ const position = turn.answers.length;
+ const choose = option => {
+  if (turn.answers.length !== position) return;
+  const right = option === question.answer;
+  turn.answers.push(right);
+  if (right) turn.correct++;
+  sessionCounts.duel++;
+  sessionWords.add(question.id);
+  if (turn.answers.length === turn.questions.length) {
+   turn.time = Math.round((performance.now() - turn.started) / 100);
+   if (duel.player === 0) {
+    duel.player = 1;
+    duel.phase = 'ready';
+   } else {
+    const [first, second] = duel.turns;
+    const byTime = first.correct === second.correct;
+    const difference = byTime ? second.time - first.time : first.correct - second.correct;
+    duelHistory.push({turns: duel.turns, byTime, winner: difference === 0 ? null : difference > 0 ? 0 : 1});
+    duel.phase = 'done';
+   }
+  }
+  renderDuel();
+ };
+ for (const option of turn.options[position]) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'option';
+  button.lang = question.source === 'fr' ? 'de' : 'fr';
+  button.textContent = option;
+  button.onclick = () => choose(option);
+  choices.append(button);
+ }
+ panel.append(prompt, choices);
+}
+
 function recordWord(){sessionCounts[mode]++;sessionWords.add(current().id)}
 function resetConfirmation(button){
  if(!button)return;
@@ -262,13 +509,14 @@ function requireSecondClick(button,firstLabel,confirmationLabel,confirmationClas
  button.classList.add(confirmationClass);
 }
 function confirmSummary(button){requireSecondClick(button,'Session beenden und Zusammenfassung erstellen',tr('Sicher ?','Confirmer ?'),'confirm-green',showSessionSummary)}
-function resetSession(){stopChrono();resetAllConfirmations();sessionStart=new Date();sessionEnd=null;sessionCounts={choice:0,type:0,cards:0,challenge:0,memory:0};sessionWords.clear();sessionCorrections=0;missed.clear();$('missed').checked=false;start()}
+function resetSession(){stopChrono();resetAllConfirmations();sessionStart=new Date();sessionEnd=null;sessionCounts={choice:0,type:0,cards:0,challenge:0,memory:0,duel:0};sessionWords.clear();sessionCorrections=0;memoryRecord=null;chronoRecord=null;duelHistory.length=0;missed.clear();$('missed').checked=false;start()}
 function confirmNewSession(button){requireSecondClick(button,'Neue Session starten',tr('Sicher? Spielstand geht verloren!','Confirmer ? La progression sera perdue !'),'confirm-red',resetSession)}
 function showSessionSummary(refresh=false){
- if(!refresh)stopChrono();
+ if(!refresh){stopChrono();stopMemoryTimer()}
  if(sessionEnd&&!refresh)return;
  resetAllConfirmations();
  if(!refresh)sessionEnd=new Date();
+ $('duel').hidden = true;
  $('game').classList.add('hidden');
  const status=$('status');status.classList.remove('hidden');status.replaceChildren();
  const heading=document.createElement('h2');heading.textContent=tr('Zusammenfassung deiner Session','Bilan de ta session');
@@ -280,7 +528,32 @@ function showSessionSummary(refresh=false){
  const info=document.createElement('p');info.textContent=tr(`Insgesamt ${total} Wörter bearbeitet (${sessionWords.size} verschiedene). Noch ${missed.size} Wörter auf der Fehlerliste. Selbstkorrekturen: ${sessionCorrections}.`,`Au total, ${total} mots travaillés (${sessionWords.size} différents). ${missed.size} mots restent à revoir. Auto-corrections : ${sessionCorrections}.`);
  const note=document.createElement('p');note.className='hint';note.textContent=tr('Die Angaben gelten nur für diese geöffnete Browser-Sitzung. Beim Neuladen werden sie zurückgesetzt. Es werden keine Daten an den Lehrer übertragen.','Ces données ne sont conservées que pendant cette session. Elles sont effacées au rechargement de la page. Aucune donnée n’est transmise au professeur.');
  const btn=document.createElement('button');btn.dataset.sessionRestart='yes';btn.textContent=tr('Neue Session starten','Commencer une nouvelle session');btn.onclick=()=>confirmNewSession(btn);
- status.append(heading,para,table,info,note,btn);
+ status.append(heading,para,table);
+ if (memoryRecord) {
+  const {elapsedMs, attempts, pairs} = memoryRecord;
+  const time = (elapsedMs / 1000).toLocaleString(language, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+  const record = document.createElement('p');
+  const label = document.createElement('strong');
+  label.textContent = tr('Memory-Rekord der Sitzung', 'Record de la session au jeu de mémoire');
+  record.append(label, ' · ', tr(
+   `${time} s · ${attempts} ${attempts === 1 ? 'Versuch' : 'Versuche'} · ${pairs} ${pairs === 1 ? 'Paar' : 'Paare'}`,
+   `${time} s · ${attempts} ${attempts === 1 ? 'essai' : 'essais'} · ${pairs} ${pairs === 1 ? 'paire' : 'paires'}`
+  ));
+  status.append(record);
+ }
+ if (chronoRecord) {
+  const {points, correct: correctWords, streak} = chronoRecord;
+  const record = document.createElement('p');
+  const label = document.createElement('strong');
+  label.textContent = tr('Zeit-Challenge-Rekord der Sitzung', 'Record de la session au défi chrono');
+  record.append(label, ' · ', tr(
+   `${points} ${points === 1 ? 'Punkt' : 'Punkte'} insgesamt · ${correctWords} richtig · längste Serie: ${streak}`,
+   `${points} ${points === 1 ? 'point' : 'points'} au total · ${correctWords} ${correctWords === 1 ? 'bonne réponse' : 'bonnes réponses'} · meilleure série : ${streak}`
+  ));
+  status.append(record);
+ }
+ if (duelHistory.length) status.append(renderDuelRounds(duelHistory));
+ status.append(info,note,btn);
 }
 $('sessionSummary').onclick=()=>confirmSummary($('sessionSummary'));
 
@@ -289,7 +562,7 @@ function alternatives(s){return s.split(';').map(norm).filter(Boolean)}
 function setText(id,s){$(id).textContent=s}
 function current(){return deck[pos]}
 function sides(w){return reverse?{question:w.de,answer:w.fr}:{question:w.fr,answer:w.de}}
-function start(){chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;let u=$('unit').value;let pool=vocab.filter(w=>(u==='all'||w.unit===u||w.unit.startsWith(u)&&u.length===1)&&(!$('missed').checked||missed.has(w.id)));deck=shuffle(pool);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${$('missed').checked?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${$('missed').checked?' (à revoir)':''}`));if(mode==='memory')initMemory();else render();if(mode==='challenge'&&deck.length)beginChrono()}
+function start(){$('duel').hidden=true;stopMemoryTimer();$('memory-time').classList.add('hidden');chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;let u=$('unit').value;let pool=vocab.filter(w=>(u==='all'||w.unit===u||w.unit.startsWith(u)&&u.length===1)&&(!$('missed').checked||missed.has(w.id)));deck=shuffle(pool);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${$('missed').checked?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${$('missed').checked?' (à revoir)':''}`));if(mode==='memory')initMemory();else if(mode==='duel')initDuel();else render();if(mode==='challenge'&&deck.length)beginChrono()}
 function render(){
  const status=$('status'), game=$('game');
  if(!deck.length){
@@ -311,7 +584,7 @@ function render(){
 
 answered=false;feedbackKind='';$('feedback').className='feedback';reverse=$('direction').value==='mix'?Math.random()<.5:$('direction').value==='de';let w=current(),s=sides(w);setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${$('unit').options[$('unit').selectedIndex].text}`);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));$('bar').style.width=`${100*pos/deck.length}%`;setText('promptlabel',reverse?tr('Übersetze ins Französische','Traduis en français'):tr('Übersetze ins Deutsche','Traduis en allemand'));$('prompt').lang=reverse?'de':'fr';setText('prompt',s.question);setText('feedback','');$('accept').classList.add('hidden');$('next').classList.add('hidden');$('typing').classList.toggle('hidden',mode!=='type');$('choices').classList.toggle('hidden',mode!=='choice'&&mode!=='challenge');$('cardactions').classList.toggle('hidden',mode!=='cards');$('reveal').classList.remove('hidden');$('known').classList.add('hidden');$('unknown').classList.add('hidden');$('typed').value='';$('typed').disabled=false;$('submit').disabled=false;
 if(mode==='choice'||mode==='challenge'){let other=shuffle(vocab.filter(x=>x.id!==w.id&&(x.unit===w.unit||x.unit[0]===w.unit[0])&&sides(x).answer!==s.answer)).slice(0,3);let opts=shuffle([w,...other]);$('choices').replaceChildren();for(let o of opts){let b=document.createElement('button');b.className='option';b.lang=reverse?'fr':'de';b.textContent=sides(o).answer;b.onclick=()=>finish(o.id===w.id,b);$('choices').append(b)}}}
-function finish(ok,clicked){if(answered||(mode==='challenge'&&Date.now()>=chronoDeadline)){if(mode==='challenge'&&Date.now()>=chronoDeadline)endChrono();return}answered=true;recordWord();if(mode==='challenge'){chronoAttempted++;chronoStreak=ok?chronoStreak+1:0;chronoBest=Math.max(chronoBest,chronoStreak);if(ok)chronoPoints+=10+Math.min(chronoStreak-1,5)*2;updateChrono()}let w=current(),s=sides(w);if(ok){correct++;missed.delete(w.id)}else missed.add(w.id);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));feedbackKind=ok?'right':'wrong';let msg=ok?tr('Richtig !','Bonne réponse !'):tr(`Richtige Antwort : ${s.answer}`,`Bonne réponse : ${s.answer}`);setText('feedback',msg);$('feedback').className='feedback '+(ok?'success':'error');$('next').classList.toggle('hidden',mode==='challenge');if(mode==='type'){$('typed').disabled=true;$('submit').disabled=true;if(!ok && $('typed').value.trim())$('accept').classList.remove('hidden')}if(clicked){for(let b of $('choices').children){b.disabled=true;if(b.textContent===s.answer)b.classList.add('good');else if(b===clicked)b.classList.add('bad')}}if(mode==='challenge'){let token=chronoToken;setTimeout(()=>{if(token===chronoToken&&mode==='challenge'&&!sessionEnd&&Date.now()<chronoDeadline)next()},450)}}
+function finish(ok,clicked){if(answered||(mode==='challenge'&&Date.now()>=chronoDeadline)){if(mode==='challenge'&&Date.now()>=chronoDeadline)endChrono();return}answered=true;recordWord();if(mode==='challenge'){chronoAttempted++;chronoStreak=ok?chronoStreak+1:0;chronoBest=Math.max(chronoBest,chronoStreak);if(ok)chronoPoints+=10+Math.min(chronoStreak-1,5)*2;updateChrono(false)}let w=current(),s=sides(w);if(ok){correct++;missed.delete(w.id)}else missed.add(w.id);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));feedbackKind=ok?'right':'wrong';let msg=ok?tr('Richtig !','Bonne réponse !'):tr(`Richtige Antwort : ${s.answer}`,`Bonne réponse : ${s.answer}`);setText('feedback',msg);$('feedback').className='feedback '+(ok?'success':'error');$('next').classList.toggle('hidden',mode==='challenge');if(mode==='type'){$('typed').disabled=true;$('submit').disabled=true;if(!ok && $('typed').value.trim())$('accept').classList.remove('hidden')}if(clicked){for(let b of $('choices').children){b.disabled=true;if(b.textContent===s.answer)b.classList.add('good');else if(b===clicked)b.classList.add('bad')}}if(mode==='challenge'){let token=chronoToken;setTimeout(()=>{if(token===chronoToken&&mode==='challenge'&&!sessionEnd&&Date.now()<chronoDeadline)next()},450)}}
 $('accept').onclick=()=>{
  if(mode!=='type'||!answered||$('accept').classList.contains('hidden'))return;
  correct++;missed.delete(current().id);sessionCorrections++;feedbackKind='accepted';
@@ -329,7 +602,8 @@ function translate() {
     `${deck.length} mots disponibles${$('missed').checked?' (à revoir)':''}`
   ));
   if (mode==='memory') { renderMemory(); return; }
-  if (chronoEnded) { endChrono(); return; }
+  if (mode==='duel') { renderDuel(); return; }
+  if (chronoEnded) { renderChronoResult(); return; }
   if (!current()) { render(); return; }
   setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${$('unit').selectedOptions[0].text}`);
   setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));
