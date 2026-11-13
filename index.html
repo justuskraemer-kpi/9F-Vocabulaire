@@ -510,7 +510,7 @@ function requireSecondClick(button,firstLabel,confirmationLabel,confirmationClas
 }
 function confirmSummary(button){requireSecondClick(button,'Session beenden und Zusammenfassung erstellen',tr('Sicher ?','Confirmer ?'),'confirm-green',showSessionSummary)}
 function resetSession(){stopChrono();resetAllConfirmations();sessionStart=new Date();sessionEnd=null;sessionCounts={choice:0,type:0,cards:0,challenge:0,memory:0,duel:0};sessionWords.clear();sessionCorrections=0;memoryRecord=null;chronoRecord=null;duelHistory.length=0;missed.clear();$('missed').checked=false;start()}
-function confirmNewSession(button){requireSecondClick(button,'Neue Session starten',tr('Sicher? Spielstand geht verloren!','Confirmer ? La progression sera perdue !'),'confirm-red',resetSession)}
+function confirmNewSession(button){requireSecondClick(button,'Neue Session starten',tr('Sicher? Zusammenfassung geht verloren!','Confirmer ? Le bilan sera perdu !'),'confirm-red',resetSession)}
 function showSessionSummary(refresh=false){
  if(!refresh){stopChrono();stopMemoryTimer()}
  if(sessionEnd&&!refresh)return;
