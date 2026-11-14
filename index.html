@@ -561,7 +561,7 @@ button.bilan-export.secondary::before {
 body:has(.vocabulary-dialog[open]) { overflow: hidden; }
 .vocabulary-toolbar {
   position: sticky; top: 0; z-index: 1;
-  border-bottom: 1px solid #cbdcd3; background: #f4f7f5;
+  border-bottom: 1px solid #cbdcd3; background: #f4f7f5; color: #234b40;
 }
 .vocabulary-toolbar-inner, .vocabulary-content {
   width: min(100%, 840px); margin-inline: auto; padding: 14px 16px;
@@ -573,19 +573,20 @@ body:has(.vocabulary-dialog[open]) { overflow: hidden; }
 .vocabulary-heading h2 { margin: 0; font-size: clamp(1rem, 3vw, 1.45rem); }
 .vocabulary-heading button { padding: 8px 12px; font-size: .85rem; }
 .vocabulary-filter {
-  position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   width: min(100%, 470px); margin: 0; padding: 3px;
-  border: 1px solid #b8cbc5; border-radius: 14px; background: #e3ebe6;
+  border: 1px solid #94aaa1; border-radius: 14px; background: #d9e5de;
 }
 .vocabulary-filter::before {
   content: ""; position: absolute; z-index: -1; inset: 3px auto 3px 3px;
-  width: calc(50% - 3px); border-radius: 10px; background: #315e51;
+  width: calc(50% - 3px); border-radius: 10px; background: #234b40;
+  box-shadow: 0 1px 3px #173b3038;
   transition: transform .18s ease;
 }
 .vocabulary-filter:has(input[value="selected"]:checked)::before { transform: translateX(100%); }
 .vocabulary-filter label {
   position: relative; display: grid; place-items: center; min-height: 42px;
-  padding: 6px; text-align: center; cursor: pointer;
+  padding: 6px; text-align: center; cursor: pointer; color: #27463d;
 }
 .vocabulary-filter input { position: absolute; opacity: 0; width: 1px; height: 1px; padding: 0; }
 .vocabulary-filter label:has(input:checked) { color: white; }
