@@ -504,6 +504,52 @@ button.bilan-export.secondary::before {
   border: 1px solid var(--line);
 }
 
+.chapter-picker { min-width: min(240px,100%); max-width: 100%; }
+.chapter-picker summary { cursor: pointer; padding: 10px 12px; border: 1px solid #b8cbc5; border-radius: 10px; background: #f3f8f5; font-weight: 700; }
+.chapter-options { display: flex; flex-direction: column; gap: 5px; padding: 8px 0; max-height: 290px; overflow: auto; }
+.chapter-options label { display: flex; align-items: center; gap: 8px; min-height: 32px; }
+.chapter-options input { accent-color: #3e6d5d; }
+
+.chapter-picker { position: relative; flex: 0 0 auto; width: min(250px,100%); }
+.chapter-picker summary { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chapter-picker[open] summary { border-color: #3e6d5d; }
+.chapter-popover {
+  position: absolute;
+  z-index: 12;
+  inset: calc(100% + 7px) auto auto 0;
+  width: min(420px, calc(100vw - 72px));
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #c9dad2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 26px #14293f26;
+}
+.chapter-popover .chapter-options { max-height: min(290px, 36dvh); }
+.chapter-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; padding-top: 8px; }
+
+.chapter-unit {
+  margin: 9px 0 0;
+  padding: 0;
+  min-inline-size: 0;
+  border: 0;
+}
+.chapter-unit legend {
+  width: 100%;
+  padding: 6px 10px;
+  margin-bottom: 3px;
+  border-radius: 6px;
+  background: #e2ece6;
+  color: #284b3e;
+  font-weight: 700;
+}
+.chapter-unit label { padding-inline-start: 10px; }
+.chapter-options .chapter-module {
+  padding-inline-start: 10px;
+  border-radius: 6px;
+  background: #f0eee8;
+}
+
 </style>
 
 </head>
@@ -524,7 +570,7 @@ button.bilan-export.secondary::before {
   </div>
 </header>
 <main>
-  <section id="class-7F" aria-labelledby="tab-7F"><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="7F-unit"><option value="all" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Tous les volets">Unité 1 · Tous les volets</option><option value="1" data-de="Volet 1" data-fr="Volet 1">Volet 1</option><option value="2" data-de="Volet 2" data-fr="Volet 2">Volet 2</option><option value="3" data-de="Volet 3" data-fr="Volet 3">Volet 3</option></select></label><fieldset class="direction-control" id="7F-direction"><legend data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction</legend><div class="direction-track"><label class="direction-stop"><input type="radio" name="7F-direction" value="fr" checked><span data-de="Französisch → Deutsch" data-fr="français → allemand">français → allemand</span></label><label class="direction-stop"><input type="radio" name="7F-direction" value="de"><span data-de="Deutsch → Französisch" data-fr="allemand → français">allemand → français</span></label><label class="direction-stop"><input type="radio" name="7F-direction" value="mix"><span data-de="Gemischt" data-fr="aléatoire">aléatoire</span></label></div></fieldset></div><div class="modes" id="7F-modes"><div class="mode-group"><span class="mode-group-label" data-de="Üben" data-fr="S’entraîner">S’entraîner</span><div class="mode-row"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="letters" aria-pressed="false" data-de="Fehlende Buchstaben" data-fr="Lettres manquantes">Lettres manquantes</button></div></div><div class="mode-group"><span class="mode-group-label" data-de="Spielen" data-fr="Jouer">Jouer</span><div class="mode-row"><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button><button data-mode="blitz" aria-pressed="false" data-de="Blitzduell" data-fr="Duel éclair">Duel éclair</button></div></div></div><div class="toolbar"><button class="missed-toggle" id="7F-missed" type="button" aria-pressed="false">
+  <section id="class-7F" aria-labelledby="tab-7F"><section class="panel"><div class="toolbar"><details class="chapter-picker"><summary><span id="7F-chapter-caption"></span></summary><div class="chapter-popover"><div id="7F-unit" class="chapter-options"><label><input type="checkbox" value="all" checked><span data-de="Alle Kapitel" data-fr="Tous les chapitres">Tous les chapitres</span></label><fieldset class="chapter-unit"><legend>Unité 1</legend><label><input type="checkbox" value="1t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="1v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="1v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label><label><input type="checkbox" value="1v3"><span data-de="Volet 3" data-fr="Volet 3">Volet 3</span></label></fieldset><label class="chapter-module"><input type="checkbox" value="m1"><span data-de="Module 1" data-fr="Module 1">Module 1</span></label><fieldset class="chapter-unit"><legend>Unité 2</legend><label><input type="checkbox" value="2a"><span data-de="Auftakt" data-fr="Approches">Approches</span></label><label><input type="checkbox" value="2t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="2v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="2v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label><label><input type="checkbox" value="2v3"><span data-de="Volet 3" data-fr="Volet 3">Volet 3</span></label></fieldset><label class="chapter-module"><input type="checkbox" value="m2"><span data-de="Module 2" data-fr="Module 2">Module 2</span></label><fieldset class="chapter-unit"><legend>Unité 3</legend><label><input type="checkbox" value="3t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="3v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="3v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label><label><input type="checkbox" value="3v3"><span data-de="Volet 3" data-fr="Volet 3">Volet 3</span></label></fieldset><label class="chapter-module"><input type="checkbox" value="m3"><span data-de="Module 3" data-fr="Module 3">Module 3</span></label><fieldset class="chapter-unit"><legend>Unité 4</legend><label><input type="checkbox" value="4a"><span data-de="Auftakt" data-fr="Approches">Approches</span></label><label><input type="checkbox" value="4t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="4v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="4v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label><label><input type="checkbox" value="4l"><span data-de="Lektüre" data-fr="Lecture">Lecture</span></label></fieldset><label class="chapter-module"><input type="checkbox" value="m4"><span data-de="Module 4" data-fr="Module 4">Module 4</span></label></div><div class="chapter-actions"><button type="button" class="secondary" id="7F-chapter-cancel" data-de="Abbrechen" data-fr="Annuler">Annuler</button><button type="button" id="7F-chapter-apply" data-de="Übernehmen" data-fr="Appliquer">Appliquer</button></div></div></details><fieldset class="direction-control" id="7F-direction"><legend data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction</legend><div class="direction-track"><label class="direction-stop"><input type="radio" name="7F-direction" value="fr" checked><span data-de="Französisch → Deutsch" data-fr="français → allemand">français → allemand</span></label><label class="direction-stop"><input type="radio" name="7F-direction" value="de"><span data-de="Deutsch → Französisch" data-fr="allemand → français">allemand → français</span></label><label class="direction-stop"><input type="radio" name="7F-direction" value="mix"><span data-de="Gemischt" data-fr="aléatoire">aléatoire</span></label></div></fieldset></div><div class="modes" id="7F-modes"><div class="mode-group"><span class="mode-group-label" data-de="Üben" data-fr="S’entraîner">S’entraîner</span><div class="mode-row"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="letters" aria-pressed="false" data-de="Fehlende Buchstaben" data-fr="Lettres manquantes">Lettres manquantes</button></div></div><div class="mode-group"><span class="mode-group-label" data-de="Spielen" data-fr="Jouer">Jouer</span><div class="mode-row"><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button><button data-mode="blitz" aria-pressed="false" data-de="Blitzduell" data-fr="Duel éclair">Duel éclair</button></div></div></div><div class="toolbar"><button class="missed-toggle" id="7F-missed" type="button" aria-pressed="false">
   <span data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span>
   <span class="missed-count" id="7F-missed-count">0</span>
 </button><button class="secondary bilan-button" id="7F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="7F-count"></p></section><section class="panel" id="7F-letters" hidden></section><section class="panel duel-panel" id="7F-duel" hidden></section><section class="panel hidden" id="7F-status" aria-live="polite"></section><section class="panel" id="7F-game"><div class="meta"><span id="7F-counter"></span><span id="7F-score"></span><strong id="7F-memory-time" class="hidden" role="timer" aria-live="off"></strong></div><div id="7F-chrono-info" class="meta hidden"><strong id="7F-chrono-time"></strong><strong id="7F-chrono-points"></strong></div><div class="progress"><div id="7F-bar"></div></div><div class="prompt"><span id="7F-promptlabel"></span><strong id="7F-prompt"></strong></div><div id="7F-choices"></div><div id="7F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="7F-cardactions" class="flashcard-actions hidden">
@@ -534,7 +580,7 @@ button.bilan-export.secondary::before {
       <span class="flashcard-back" id="7F-card-translation" aria-hidden="true"></span>
     </span>
   </button><div class="flashcard-ratings"><button id="7F-known" class="flashcard-known hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="7F-unknown" class="flashcard-review hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div></div><div class="feedback" id="7F-feedback" aria-live="polite"></div><button id="7F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
-  <section id="class-9F" aria-labelledby="tab-9F" hidden><section class="panel"><div class="toolbar"><label data-de="Vokabelbereich" data-fr="Sélection du vocabulaire">Sélection du vocabulaire<select id="9F-unit"><option value="all" data-de="Unités 1–3 · Gesamter Wortschatz" data-fr="Unités 1–3 · Tout le vocabulaire">Unités 1–3 · Tout le vocabulaire</option><option value="1" data-de="Unité 1 · Alle Abschnitte" data-fr="Unité 1 · Toutes les parties">Unité 1 · Toutes les parties</option><option value="1a" data-de="Unité 1 · Auftaktseite" data-fr="Unité 1 · Page d’ouverture">Unité 1 · Page d’ouverture</option><option value="1t" data-de="Unité 1 · Themenwortschatz" data-fr="Unité 1 · Vocabulaire thématique">Unité 1 · Vocabulaire thématique</option><option value="1v1" data-de="Unité 1 · Volet 1" data-fr="Unité 1 · Volet 1">Unité 1 · Volet 1</option><option value="1v2" data-de="Unité 1 · Volet 2" data-fr="Unité 1 · Volet 2">Unité 1 · Volet 2</option><option value="2" data-de="Unité 2 · Alle Abschnitte" data-fr="Unité 2 · Toutes les parties">Unité 2 · Toutes les parties</option><option value="2a" data-de="Unité 2 · Auftaktseite" data-fr="Unité 2 · Page d’ouverture">Unité 2 · Page d’ouverture</option><option value="2t" data-de="Unité 2 · Themenwortschatz" data-fr="Unité 2 · Vocabulaire thématique">Unité 2 · Vocabulaire thématique</option><option value="2v1" data-de="Unité 2 · Volet 1" data-fr="Unité 2 · Volet 1">Unité 2 · Volet 1</option><option value="2v2" data-de="Unité 2 · Volet 2" data-fr="Unité 2 · Volet 2">Unité 2 · Volet 2</option><option value="3" data-de="Unité 3 · Alle Abschnitte" data-fr="Unité 3 · Toutes les parties">Unité 3 · Toutes les parties</option><option value="3a" data-de="Unité 3 · Auftaktseite" data-fr="Unité 3 · Page d’ouverture">Unité 3 · Page d’ouverture</option><option value="3t" data-de="Unité 3 · Themenwortschatz" data-fr="Unité 3 · Vocabulaire thématique">Unité 3 · Vocabulaire thématique</option><option value="3v1" data-de="Unité 3 · Volet 1" data-fr="Unité 3 · Volet 1">Unité 3 · Volet 1</option><option value="3v2" data-de="Unité 3 · Volet 2" data-fr="Unité 3 · Volet 2">Unité 3 · Volet 2</option></select></label><fieldset class="direction-control" id="9F-direction"><legend data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction</legend><div class="direction-track"><label class="direction-stop"><input type="radio" name="9F-direction" value="fr" checked><span data-de="Französisch → Deutsch" data-fr="français → allemand">français → allemand</span></label><label class="direction-stop"><input type="radio" name="9F-direction" value="de"><span data-de="Deutsch → Französisch" data-fr="allemand → français">allemand → français</span></label><label class="direction-stop"><input type="radio" name="9F-direction" value="mix"><span data-de="Gemischt" data-fr="aléatoire">aléatoire</span></label></div></fieldset></div><div class="modes" id="9F-modes"><div class="mode-group"><span class="mode-group-label" data-de="Üben" data-fr="S’entraîner">S’entraîner</span><div class="mode-row"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="letters" aria-pressed="false" data-de="Fehlende Buchstaben" data-fr="Lettres manquantes">Lettres manquantes</button></div></div><div class="mode-group"><span class="mode-group-label" data-de="Spielen" data-fr="Jouer">Jouer</span><div class="mode-row"><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button><button data-mode="blitz" aria-pressed="false" data-de="Blitzduell" data-fr="Duel éclair">Duel éclair</button></div></div></div><div class="toolbar"><button class="missed-toggle" id="9F-missed" type="button" aria-pressed="false">
+  <section id="class-9F" aria-labelledby="tab-9F" hidden><section class="panel"><div class="toolbar"><details class="chapter-picker"><summary><span id="9F-chapter-caption"></span></summary><div class="chapter-popover"><div id="9F-unit" class="chapter-options"><label><input type="checkbox" value="all" checked><span data-de="Alle Kapitel" data-fr="Tous les chapitres">Tous les chapitres</span></label><fieldset class="chapter-unit"><legend>Unité 1</legend><label><input type="checkbox" value="1a"><span data-de="Auftaktseite" data-fr="Page d’ouverture">Page d’ouverture</span></label><label><input type="checkbox" value="1t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="1v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="1v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label></fieldset><fieldset class="chapter-unit"><legend>Unité 2</legend><label><input type="checkbox" value="2a"><span data-de="Auftaktseite" data-fr="Page d’ouverture">Page d’ouverture</span></label><label><input type="checkbox" value="2t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="2v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="2v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label></fieldset><fieldset class="chapter-unit"><legend>Unité 3</legend><label><input type="checkbox" value="3a"><span data-de="Auftaktseite" data-fr="Page d’ouverture">Page d’ouverture</span></label><label><input type="checkbox" value="3t"><span data-de="Themenwortschatz" data-fr="Vocabulaire thématique">Vocabulaire thématique</span></label><label><input type="checkbox" value="3v1"><span data-de="Volet 1" data-fr="Volet 1">Volet 1</span></label><label><input type="checkbox" value="3v2"><span data-de="Volet 2" data-fr="Volet 2">Volet 2</span></label></fieldset></div><div class="chapter-actions"><button type="button" class="secondary" id="9F-chapter-cancel" data-de="Abbrechen" data-fr="Annuler">Annuler</button><button type="button" id="9F-chapter-apply" data-de="Übernehmen" data-fr="Appliquer">Appliquer</button></div></div></details><fieldset class="direction-control" id="9F-direction"><legend data-de="Übersetzungsrichtung" data-fr="Sens de traduction">Sens de traduction</legend><div class="direction-track"><label class="direction-stop"><input type="radio" name="9F-direction" value="fr" checked><span data-de="Französisch → Deutsch" data-fr="français → allemand">français → allemand</span></label><label class="direction-stop"><input type="radio" name="9F-direction" value="de"><span data-de="Deutsch → Französisch" data-fr="allemand → français">allemand → français</span></label><label class="direction-stop"><input type="radio" name="9F-direction" value="mix"><span data-de="Gemischt" data-fr="aléatoire">aléatoire</span></label></div></fieldset></div><div class="modes" id="9F-modes"><div class="mode-group"><span class="mode-group-label" data-de="Üben" data-fr="S’entraîner">S’entraîner</span><div class="mode-row"><button data-mode="choice" class="active" aria-pressed="true" data-de="Multiple Choice" data-fr="QCM">QCM</button><button data-mode="cards" aria-pressed="false" data-de="Karteikarten" data-fr="Cartes mémoire">Cartes mémoire</button><button data-mode="letters" aria-pressed="false" data-de="Fehlende Buchstaben" data-fr="Lettres manquantes">Lettres manquantes</button></div></div><div class="mode-group"><span class="mode-group-label" data-de="Spielen" data-fr="Jouer">Jouer</span><div class="mode-row"><button data-mode="memory" aria-pressed="false" data-de="Vokabel-Memory" data-fr="Jeu de mémoire">Jeu de mémoire</button><button data-mode="challenge" aria-pressed="false" data-de="Zeit-Challenge" data-fr="Défi chrono">Défi chrono</button><button data-mode="duel" aria-pressed="false" data-de="Vokabelduell" data-fr="Duel de vocabulaire">Duel de vocabulaire</button><button data-mode="blitz" aria-pressed="false" data-de="Blitzduell" data-fr="Duel éclair">Duel éclair</button></div></div></div><div class="toolbar"><button class="missed-toggle" id="9F-missed" type="button" aria-pressed="false">
   <span data-de="Nur Fehler wiederholen" data-fr="Réviser uniquement les erreurs">Réviser uniquement les erreurs</span>
   <span class="missed-count" id="9F-missed-count">0</span>
 </button><button class="secondary bilan-button" id="9F-sessionSummary" type="button" data-de="Session beenden und Zusammenfassung erstellen" data-fr="Terminer la session et afficher le bilan">Terminer la session et afficher le bilan</button></div><p class="hint" id="9F-count"></p></section><section class="panel" id="9F-letters" hidden></section><section class="panel duel-panel" id="9F-duel" hidden></section><section class="panel hidden" id="9F-status" aria-live="polite"></section><section class="panel" id="9F-game"><div class="meta"><span id="9F-counter"></span><span id="9F-score"></span><strong id="9F-memory-time" class="hidden" role="timer" aria-live="off"></strong></div><div id="9F-chrono-info" class="meta hidden"><strong id="9F-chrono-time"></strong><strong id="9F-chrono-points"></strong></div><div class="progress"><div id="9F-bar"></div></div><div class="prompt"><span id="9F-promptlabel"></span><strong id="9F-prompt"></strong></div><div id="9F-choices"></div><div id="9F-memory-board" class="memory-board hidden" data-aria-de="Vokabel-Memory" data-aria-fr="Jeu de mémoire"></div><div id="9F-cardactions" class="flashcard-actions hidden">
@@ -1633,7 +1679,56 @@ function syncDirectionControl() {
  control.disabled = fixedDirection !== null;
  control.querySelector(`input[value="${fixedDirection ?? preferredDirection}"]`).checked = true;
 }
-function start(){$('missed').disabled=mode==='duel'||mode==='blitz';$('duel').hidden=true;$('letters').hidden=true;syncDirectionControl();stopMemoryTimer();$('memory-time').classList.add('hidden');chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;let u=$('unit').value;let pool=vocab.filter(w=>(u==='all'||w.unit===u||w.unit.startsWith(u)&&u.length===1)&&(!reviewingMissed()||missed.has(w.id)));deck=shuffle(pool);if(mode==='letters')deck=deck.filter(word=>/\p{L}/u.test(word.fr)).slice(0,10);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${reviewingMissed()?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${reviewingMissed()?' (à revoir)':''}`));if(mode==='memory')initMemory();else if(mode==='duel')initDuel();else if(mode==='letters')startLettersWord();else if(mode==='blitz')renderBlitzLauncher();else render();if(mode==='challenge'&&deck.length)beginChrono()}
+const chapterOptions = [...$('unit').querySelectorAll('input')];
+const chapterPicker = $('unit').closest('details');
+const chapterTrigger = chapterPicker.querySelector('summary');
+let appliedChapters = chapterOptions.filter(input => input.checked).map(input => input.value);
+
+function updateChapterCaption() {
+ const label = appliedChapters.includes('all') ? tr('Alle Kapitel','Tous les chapitres')
+  : tr(`${appliedChapters.length} ausgewählt`, `${appliedChapters.length} sélectionnés`);
+ setText('chapter-caption', tr('Kapitel', 'Chapitres') + ' · ' + label);
+}
+
+function restoreChapterDraft() {
+ for (const input of chapterOptions) input.checked = appliedChapters.includes(input.value);
+ $('chapter-apply').disabled = appliedChapters.length === 0;
+}
+
+function closeChapterPicker(restoreFocus = false) {
+ chapterPicker.open = false;
+ restoreChapterDraft();
+ if (restoreFocus) chapterTrigger.focus({preventScroll: true});
+}
+
+chapterTrigger.addEventListener('click', restoreChapterDraft);
+chapterPicker.addEventListener('keydown', event => {
+ if (event.key !== 'Escape' || !chapterPicker.open) return;
+ event.preventDefault();
+ closeChapterPicker(true);
+});
+document.addEventListener('pointerdown', event => {
+ if (chapterPicker.open && !chapterPicker.contains(event.target)) closeChapterPicker();
+});
+$('chapter-cancel').onclick = () => closeChapterPicker(true);
+$('chapter-apply').onclick = () => {
+ const next = chapterOptions.filter(input => input.checked).map(input => input.value);
+ if (!next.length) return;
+ const changed = next.join() !== appliedChapters.join();
+ appliedChapters = next;
+ closeChapterPicker(true);
+ if (changed) start();
+};
+
+function chapterLabel(word) {
+ const input = $('unit').querySelector(`input[value="${word.unit}"]`);
+ if (!input) return word.unit;
+ const unit = input.closest('.chapter-unit');
+ const label = input.nextElementSibling.textContent;
+ return unit ? unit.querySelector('legend').textContent + ' · ' + label : label;
+}
+
+function start(){updateChapterCaption();$('missed').disabled=mode==='duel'||mode==='blitz';$('duel').hidden=true;$('letters').hidden=true;syncDirectionControl();stopMemoryTimer();$('memory-time').classList.add('hidden');chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;const units = appliedChapters; let pool=vocab.filter(w=>units.some(u=>u==='all'||w.unit===u||(u.length===1&&w.unit.startsWith(u)))&&(!reviewingMissed()||missed.has(w.id)));deck=shuffle(pool);if(mode==='letters')deck=deck.filter(word=>/\p{L}/u.test(word.fr)).slice(0,10);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${reviewingMissed()?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${reviewingMissed()?' (à revoir)':''}`));if(mode==='memory')initMemory();else if(mode==='duel')initDuel();else if(mode==='letters')startLettersWord();else if(mode==='blitz')renderBlitzLauncher();else render();if(mode==='challenge'&&deck.length)beginChrono()}
 function render(){
  const status=$('status'), game=$('game');
  if(!deck.length){
@@ -1653,8 +1748,16 @@ function render(){
  }
  status.classList.add('hidden');game.classList.remove('hidden');$('chrono-info').classList.toggle('hidden',mode!=='challenge');
 
-answered=false;feedbackKind='';$('feedback').className='feedback';reverse=selectedDirection()==='mix'?Math.random()<.5:selectedDirection()==='de';let w=current(),s=sides(w);setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${$('unit').options[$('unit').selectedIndex].text}`);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));$('bar').style.width=`${100*pos/deck.length}%`;setText('promptlabel',reverse?tr('Übersetze ins Französische','Traduis en français'):tr('Übersetze ins Deutsche','Traduis en allemand'));$('prompt').lang=reverse?'de':'fr';setText('prompt',s.question);setText('feedback','');$('next').classList.add('hidden');$('choices').classList.toggle('hidden',mode!=='choice'&&mode!=='challenge');$('cardactions').classList.toggle('hidden',mode!=='cards');if(mode==='cards')setCardRevealed(false);$('known').classList.add('hidden');$('unknown').classList.add('hidden');
-if(mode==='choice'||mode==='challenge'){let other=shuffle(vocab.filter(x=>x.id!==w.id&&(x.unit===w.unit||x.unit[0]===w.unit[0])&&sides(x).answer!==s.answer)).slice(0,3);let opts=shuffle([w,...other]);$('choices').replaceChildren();for(let o of opts){let b=document.createElement('button');b.className='option';b.lang=reverse?'fr':'de';b.textContent=sides(o).answer;b.onclick=()=>finish(o.id===w.id,b);$('choices').append(b)}}}
+answered=false;feedbackKind='';$('feedback').className='feedback';reverse=selectedDirection()==='mix'?Math.random()<.5:selectedDirection()==='de';let w=current(),s=sides(w);setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${chapterLabel(w)}`);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));$('bar').style.width=`${100*pos/deck.length}%`;setText('promptlabel',reverse?tr('Übersetze ins Französische','Traduis en français'):tr('Übersetze ins Deutsche','Traduis en allemand'));$('prompt').lang=reverse?'de':'fr';setText('prompt',s.question);setText('feedback','');$('next').classList.add('hidden');$('choices').classList.toggle('hidden',mode!=='choice'&&mode!=='challenge');$('cardactions').classList.toggle('hidden',mode!=='cards');if(mode==='cards')setCardRevealed(false);$('known').classList.add('hidden');$('unknown').classList.add('hidden');
+if(mode==='choice'||mode==='challenge'){const accepted = new Set(vocab.filter(x => norm(sides(x).question) === norm(s.question)).flatMap(x => alternatives(sides(x).answer)));
+const other = [];
+for (const entry of shuffle(vocab.filter(x => x.unit[0] === w.unit[0]))) {
+ const meanings = alternatives(sides(entry).answer);
+ if (!meanings.length || meanings.some(meaning => accepted.has(meaning))) continue;
+ other.push(entry);
+ meanings.forEach(meaning => accepted.add(meaning));
+ if (other.length === 3) break;
+}let opts=shuffle([w,...other]);$('choices').replaceChildren();for(let o of opts){let b=document.createElement('button');b.className='option';b.lang=reverse?'fr':'de';b.textContent=sides(o).answer;b.onclick=()=>finish(o.id===w.id,b);$('choices').append(b)}}}
 function finish(ok,clicked){if(answered||(mode==='challenge'&&Date.now()>=chronoDeadline)){if(mode==='challenge'&&Date.now()>=chronoDeadline)endChrono();return}answered=true;recordWord();if(mode==='challenge'){chronoAttempted++;chronoStreak=ok?chronoStreak+1:0;chronoBest=Math.max(chronoBest,chronoStreak);if(ok)chronoPoints+=10+Math.min(chronoStreak-1,5)*2;updateChrono(false)}let w=current(),s=sides(w);if(ok){correct++;setMissed(w.id, false)}else setMissed(w.id, true);setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));feedbackKind=ok?'right':'wrong';let msg=ok?tr('Richtig !','Bonne réponse !'):tr(`Richtige Antwort : ${s.answer}`,`Bonne réponse : ${s.answer}`);setText('feedback',msg);$('feedback').className='feedback '+(ok?'success':'error');$('next').classList.toggle('hidden',mode==='challenge');if(clicked){for(let b of $('choices').children){b.disabled=true;if(b.textContent===s.answer)b.classList.add('good');else if(b===clicked)b.classList.add('bad')}}if(mode==='challenge'){let token=chronoToken;setTimeout(()=>{if(token===chronoToken&&mode==='challenge'&&!sessionEnd&&Date.now()<chronoDeadline)next()},450)}}
 function setCardRevealed(revealed) {
  const card = $('reveal');
@@ -1676,7 +1779,15 @@ function next(){pos++;render()}$('next').onclick=next;$('reveal').onclick=()=>{
   $('known').classList.remove('hidden');
   $('unknown').classList.remove('hidden');
  }
-};$('known').onclick=()=>{recordWord();correct++;setMissed(current().id, false);next()};$('unknown').onclick=()=>{recordWord();setMissed(current().id, true);next()};$('unit').onchange=start;$('direction').onchange=()=>{
+};$('known').onclick=()=>{recordWord();correct++;setMissed(current().id, false);next()};$('unknown').onclick=()=>{recordWord();setMissed(current().id, true);next()};$('unit').onchange = event => {
+ const all = chapterOptions[0];
+ if (event.target === all && all.checked) {
+  for (const input of chapterOptions.slice(1)) input.checked = false;
+ } else if (event.target !== all) {
+  all.checked = false;
+ }
+ $('chapter-apply').disabled = !chapterOptions.some(input => input.checked);
+};$('direction').onchange=()=>{
  if ($('direction').disabled) return;
  preferredDirection = selectedDirection();
  start();
@@ -1696,6 +1807,7 @@ for (const button of modeButtons) {
  };
 }
 function translate() {
+  updateChapterCaption();
   resetAllConfirmations();
   if (sessionEnd) { showSessionSummary(true); return; }
   setText('count',tr(
@@ -1708,7 +1820,7 @@ function translate() {
   if (mode==='blitz') { renderBlitzLauncher(); if (blitzDialog) renderBlitz(); return; }
   if (chronoEnded) { renderChronoResult(); return; }
   if (!current()) { render(); return; }
-  setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${$('unit').selectedOptions[0].text}`);
+  setText('counter',`${tr('Vokabel','Mot')} ${pos+1} / ${deck.length} · ${chapterLabel(current())}`);
   setText('score',tr(`${correct} richtig`,`${correct} bonne${correct===1?'':'s'} réponse${correct===1?'':'s'}`));
   setText('promptlabel',reverse?tr('Übersetze ins Französische','Traduis en français'):tr('Übersetze ins Deutsche','Traduis en allemand'));
   if (feedbackKind==='right') setText('feedback',tr('Richtig!','Bonne réponse !'));
@@ -1721,25 +1833,599 @@ return {translate};
 }
 
 const vocab7F=[
-[1,'le matin','der Morgen; der Vormittag; am Vormittag'],[1,'à midi','mittags; um 12 Uhr'],[1,"l’après-midi",'der Nachmittag'],[1,'je ne peux pas','ich kann nicht'],[1,'mais non !','aber nein!; nicht doch!'],[1,'le collège','die Schule; die weiterführende Schule'],[1,'le CDI','die Schulbibliothek'],[1,'la cantine','die Kantine'],[1,'la salle','der Raum; der Unterrichtsraum'],[1,'les toilettes','die Toiletten'],[1,"l’élève",'der Schüler; die Schülerin'],[1,'le surveillant / la surveillante','die Aufsichtsperson'],[1,'le / la CPE','der Schulbetreuer; die Schulbetreuerin'],[1,'le bureau','das Büro'],[1,'la salle des profs','das Lehrerzimmer'],[1,'le principal / la principale','der Schulleiter; die Schulleiterin'],[1,'le prof / la prof','der Lehrer; die Lehrerin'],[1,'le / la documentaliste','der Bibliothekar; die Bibliothekarin'],[1,'le gymnase','die Turnhalle'],[1,'un amphithéâtre','eine Aula; ein Hörsaal'],[1,'un / une concierge','der Hausmeister; die Hausmeisterin'],[1,'des casiers','Schließfächer'],[1,'une cafétéria','eine Cafeteria'],[1,'un délégué / une déléguée','der Klassensprecher; die Klassensprecherin'],[1,'sévère','streng'],[1,'être pressé(e)','es eilig haben'],[1,'partout','überall'],[1,'mon point faible','mein Schwachpunkt'],[1,'oublier','vergessen'],[1,'même','sogar'],[1,'aller','gehen'],[1,'ranger','aufräumen'],[1,'manger','essen'],[1,'préparer','vorbereiten'],[1,'téléphoner','telefonieren'],
-[2,'organiser','organisieren'],[2,'surveiller','beaufsichtigen; überwachen'],[2,'la solution','die Lösung'],[2,"l’information",'die Information'],[2,'la récréation','die Pause in der Schule'],[2,'attention !','Achtung!'],[2,'la mission','der Auftrag; die Mission'],[2,'le papier','das Papier; das Dokument'],[2,'le billet de retard','der Nachweis über das Zuspätkommen'],[2,"l’exposé",'der Vortrag'],[2,'la journée','der Tag in seinem Verlauf'],[2,'le cauchemar','der Albtraum'],[2,'commencer','anfangen; beginnen'],[2,'terminer','aufhören; beenden'],[2,'avoir de la chance','Glück haben'],[2,'avoir cours','Unterricht haben'],[2,'le cours','der Unterricht; die Unterrichtsstunde'],[2,'déjà','schon; bereits'],[2,'ensuite','dann; anschließend'],[2,'la matière','das Schulfach'],[2,'la cour','der Schulhof; der Hof'],[2,'est-ce que','Einleitung einer Entscheidungsfrage'],[2,'comment','wie'],[2,'où','wo'],[2,'qui','wer'],[2,'quoi','was'],[2,'quand','wann'],[2,'pourquoi','warum'],[2,'notre / nos','unser / unsere'],[2,'votre / vos','euer / eure; Ihr / Ihre'],[2,'leur / leurs','ihr / ihre'],[2,'râler','meckern; motzen'],[2,'expliquer','erklären'],[2,'raconter sa vie','seine Lebensgeschichte erzählen'],[2,'bizarre','merkwürdig'],
-[3,'trop','zu; allzu; zu viel'],[3,'le correspondant / la correspondante','der Austauschpartner; die Austauschpartnerin'],[3,'ça dépend','es kommt darauf an'],[3,'ça suffit !','es reicht!'],[3,'le terrain','der Platz; das Gelände'],[3,'la carte','die Karte'],[3,'allemand / allemande','deutsch'],[3,'donner son avis','seine Meinung äußern'],[3,'le commentaire','der Kommentar'],[3,'je trouve que','ich finde, dass'],[3,'nul / nulle','schlecht; doof'],[3,'bon / bonne','gut'],[3,"l’ambiance",'die Stimmung; die Atmosphäre'],[3,'propre','sauber'],[3,'le bruit','der Lärm; das Geräusch'],[3,"c’est l’horreur !",'das ist schrecklich!'],[3,"c’est nul !",'das ist doof!'],[3,"c’est dommage !",'das ist schade!'],[3,"c’est drôle !",'das ist lustig!'],[3,"c’est super !",'das ist super!'],[3,'il n’y a pas de','es gibt keinen; keine; kein'],[3,'ne … plus de','kein; keine; keinen mehr'],[3,'ne … pas assez de','nicht genug'],[3,'assez de','genug'],[3,'beaucoup de','viel; viele'],[3,'trop de','zu viel; zu viele'],[3,'au secours !','zu Hilfe!'],[3,'donner','geben'],[3,'vite','schnell'],[3,'la rentrée','der Schuljahresbeginn'],[3,"l’an",'das Jahr'],[3,"l’ascenseur",'der Aufzug'],[3,'le plat','das Gericht; das Hauptgericht'],[3,'gaspiller','verschwenden'],[3,'le pain','das Brot'],
-[1,"le point faible","der Schwachpunkt"],
-[1,"un casier","ein Schließfach"],
-[2,"la classe","die Klasse; das Klassenzimmer"],
-[2,"la salle de classe","das Klassenzimmer"],
-[2,"l’emploi du temps","der Stundenplan"],
-[2,"souvent","oft"],
-[2,"la vie","das Leben"],
-[3,"écrire","schreiben"],
-[3,"donner des devoirs","Hausaufgaben aufgeben"],
-[3,"les devoirs","die Hausaufgaben"],
-[3,"habiter","wohnen"],
-[3,"depuis","seit"],
-[3,"préféré / préférée","Lieblings-; bevorzugt"],
-[3,"assez","genug; ziemlich"],
-[3,"beaucoup","viel; viele"],
-[3,"le problème","das Problem"]
+["1t", "l’emploi du temps", "der Stundenplan"],
+["1t", "le français", "Französisch"],
+["1t", "l’allemand", "Deutsch"],
+["1t", "l’anglais", "Englisch"],
+["1t", "le latin", "Latein"],
+["1t", "les arts plastiques", "Kunst"],
+["1t", "l’histoire-géo", "Geschichte und Erdkunde"],
+["1t", "l’histoire", "die Geschichte"],
+["1t", "la géographie", "Geografie, Erdkunde"],
+["1t", "la techno(logie)", "Technik"],
+["1t", "l’EPS", "Sport"],
+["1t", "les SVT", "Biologie"],
+["1t", "les sciences physiques", "Physik"],
+["1t", "la science", "die Wissenschaft"],
+["1t", "les maths / les mathématiques", "Mathe/Mathematik"],
+["1t", "la récré / la récréation", "die Pause in der Schule"],
+["1t", "la cantine", "die Kantine, die Mensa"],
+["1t", "la permanence", "die Freiarbeit"],
+["1t", "en (+ matière)", "in + Fach"],
+["1t", "lundi", "Montag, am Montag"],
+["1t", "mardi", "Dienstag, am Dienstag"],
+["1t", "mercredi", "Mittwoch, am Mittwoch"],
+["1t", "jeudi", "Donnerstag, am Donnerstag"],
+["1t", "vendredi", "Freitag, am Freitag"],
+["1t", "samedi", "Samstag, am Samstag"],
+["1t", "dimanche", "Sonntag, am Sonntag"],
+["1t", "le lundi", "montags, jeden Montag"],
+["1t", "le mardi", "dienstags, jeden Dienstag"],
+["1t", "le mercredi", "mittwochs, jeden Mittwoch"],
+["1t", "le jeudi", "donnerstags, jeden Donnerstag"],
+["1t", "le vendredi", "freitags, jeden Freitag"],
+["1t", "le samedi", "samstags, jeden Samstag"],
+["1t", "le dimanche", "sonntags, jeden Sonntag"],
+["1t", "le matin", "der Morgen; der Vormittag; am Vormittag"],
+["1t", "à midi", "mittags; um 12 Uhr"],
+["1t", "l’après-midi", "der Nachmittag, am Nachmittag"],
+["1t", "je ne peux pas", "ich kann nicht"],
+["1t", "mais non !", "aber nein!; nicht doch!"],
+["1v1", "tout", "alles"],
+["1v1", "l’info / l’information", "die Info, die Information"],
+["1v1", "le collège", "die Schule; die weiterführende Schule"],
+["1v1", "le CDI", "die Schulbibliothek"],
+["1v1", "la cantine", "die Kantine"],
+["1v1", "la salle", "der (Unterrichts-)Raum"],
+["1v1", "les toilettes", "die Toilette"],
+["1v1", "l’élève", "der Schüler; die Schülerin"],
+["1v1", "le surveillant / la surveillante", "die Aufsichtsperson"],
+["1v1", "le/la CPE", "der/die Schulbetreuer/-in am collège"],
+["1v1", "le bureau / les bureaux", "das Büro"],
+["1v1", "la salle des profs", "das Lehrerzimmer"],
+["1v1", "le principal / la principale", "der Schulleiter; die Schulleiterin"],
+["1v1", "le prof / la prof", "der Lehrer; die Lehrerin"],
+["1v1", "le / la documentaliste", "der Bibliothekar; die Bibliothekarin"],
+["1v1", "un gymnase", "eine Turnhalle"],
+["1v1", "un amphithéâtre", "eine Aula"],
+["1v1", "un / une concierge", "der Hausmeister; die Hausmeisterin"],
+["1v1", "des casiers", "Schließfächer"],
+["1v1", "une cafétéria", "eine Cafeteria"],
+["1v1", "un délégué / une déléguée", "der Klassensprecher; die Klassensprecherin"],
+["1v1", "sévère", "streng"],
+["1v1", "être pressé / pressée", "es eilig haben, in Eile sein"],
+["1v1", "partout", "überall"],
+["1v1", "mon point faible", "mein Schwachpunkt"],
+["1v1", "oublier", "vergessen"],
+["1v1", "même", "sogar"],
+["1v1", "aller", "gehen"],
+["1v1", "ranger", "aufräumen"],
+["1v1", "manger", "essen"],
+["1v1", "préparer", "vorbereiten"],
+["1v1", "téléphoner", "telefonieren"],
+["1v1", "organiser", "organisieren"],
+["1v1", "surveiller", "beaufsichtigen; überwachen"],
+["1v1", "la solution", "die Lösung"],
+["1v1", "la récréation", "die Pause in der Schule"],
+["1v1", "attention !", "Achtung!"],
+["1v1", "la mission", "der Auftrag; die Mission"],
+["1v1", "le papier", "das Papier; das Dokument"],
+["1v1", "le billet de retard", "der Nachweis über das Zuspätkommen"],
+["1v1", "l’exposé", "der Vortrag"],
+["1v1", "le point faible", "der Schwachpunkt"],
+["1v1", "un casier", "ein Schließfach"],
+["1v2", "Qu’est-ce que … ?", "Was …?"],
+["1v2", "le/la corres / le/la correspondant(e)", "der/die Austauschpartner/-in"],
+["1v2", "la journée", "der Tag in seinem Verlauf"],
+["1v2", "le cauchemar", "der Albtraum"],
+["1v2", "commencer", "anfangen; beginnen"],
+["1v2", "terminer", "aufhören; beenden"],
+["1v2", "avoir de la chance", "Glück haben"],
+["1v2", "avoir cours", "Unterricht haben"],
+["1v2", "le cours", "der Unterricht; die Unterrichtsstunde"],
+["1v2", "déjà", "schon; bereits"],
+["1v2", "ensuite", "dann; anschließend"],
+["1v2", "la matière", "das Schulfach"],
+["1v2", "la cour", "der Schulhof; der Hof"],
+["1v2", "est-ce que", "Einleitung einer Entscheidungsfrage"],
+["1v2", "comment", "wie"],
+["1v2", "où", "wo"],
+["1v2", "qui", "wer"],
+["1v2", "quoi", "was"],
+["1v2", "quand", "wann"],
+["1v2", "pourquoi", "warum"],
+["1v2", "notre / nos", "unser / unsere"],
+["1v2", "votre / vos", "euer / eure; Ihr / Ihre"],
+["1v2", "leur / leurs", "ihr / ihre"],
+["1v2", "râler", "meckern; motzen"],
+["1v2", "expliquer", "erklären"],
+["1v2", "raconter sa vie", "seine Lebensgeschichte erzählen"],
+["1v2", "bizarre", "merkwürdig"],
+["1v2", "trop", "total, voll"],
+["1v2", "ça dépend", "es kommt darauf an"],
+["1v2", "ça suffit !", "es reicht!"],
+["1v2", "le terrain", "der Platz, das Terrain"],
+["1v2", "la carte", "die Karte"],
+["1v2", "allemand / allemande", "deutsch"],
+["1v2", "la classe", "die Klasse; das Klassenzimmer"],
+["1v2", "la salle de classe", "das Klassenzimmer"],
+["1v2", "souvent", "oft"],
+["1v2", "la vie", "das Leben"],
+["1v3", "ne … pas de", "kein/keine/keinen"],
+["1v3", "donner son avis", "seine Meinung äußern"],
+["1v3", "le commentaire", "der Kommentar"],
+["1v3", "je trouve que", "ich finde, dass"],
+["1v3", "nul / nulle", "schlecht; doof"],
+["1v3", "bon / bonne", "gut"],
+["1v3", "l’ambiance", "die Stimmung; die Atmosphäre"],
+["1v3", "propre", "sauber"],
+["1v3", "le bruit", "der Lärm; das Geräusch"],
+["1v3", "c’est l’horreur !", "das ist schrecklich!"],
+["1v3", "c’est nul !", "das ist doof!"],
+["1v3", "c’est dommage !", "das ist schade!"],
+["1v3", "c’est drôle !", "das ist lustig!"],
+["1v3", "c’est super !", "das ist super!"],
+["1v3", "il n’y a pas de", "es gibt keinen; keine; kein"],
+["1v3", "ne … plus de", "kein; keine; keinen mehr"],
+["1v3", "ne … pas assez de", "nicht genug, nicht genügend"],
+["1v3", "assez de", "genug, genügend"],
+["1v3", "beaucoup de", "viel; viele"],
+["1v3", "trop de", "zu viel; zu viele"],
+["1v3", "au secours !", "zu Hilfe!"],
+["1v3", "donner", "geben"],
+["1v3", "vite", "schnell"],
+["1v3", "la rentrée", "der Schuljahresbeginn"],
+["1v3", "l’an", "das Jahr"],
+["1v3", "l’ascenseur", "der Aufzug"],
+["1v3", "le plat", "das Gericht; das Hauptgericht"],
+["1v3", "gaspiller", "verschwenden"],
+["1v3", "le pain", "das Brot"],
+["1v3", "écrire", "schreiben"],
+["1v3", "donner des devoirs", "Hausaufgaben aufgeben"],
+["1v3", "les devoirs", "die Hausaufgaben"],
+["1v3", "habiter", "wohnen"],
+["1v3", "depuis", "seit"],
+["1v3", "préféré / préférée", "Lieblings-; bevorzugt"],
+["1v3", "assez", "genug; ziemlich"],
+["1v3", "beaucoup", "viel; viele"],
+["1v3", "le problème", "das Problem"],
+["m1", "avoir faim", "Hunger haben"],
+["m1", "ne plus avoir faim", "keinen Hunger mehr haben; satt sein"],
+["m1", "avoir soif", "Durst haben"],
+["m1", "ne pas avoir soif", "keinen Durst haben"],
+["m1", "végétarien / végétarienne", "vegetarisch"],
+["m1", "prendre qc", "etw. nehmen"],
+["m1", "sans", "ohne"],
+["m1", "Tu me passes… ?", "Reichst du mir …?"],
+["m1", "l’eau", "das Wasser"],
+["m1", "Bon appétit !", "Guten Appetit!"],
+["m1", "C’est bon !", "Das ist lecker!"],
+["m1", "Beurk !", "Bäh!"],
+["m1", "Ce n’est pas bon !", "Das ist nicht lecker!"],
+["m1", "Il y a trop de sel.", "Es ist versalzen."],
+["m1", "le sel", "das Salz"],
+["m1", "le menu", "das Menü"],
+["m1", "l’entrée", "die Vorspeise"],
+["m1", "le plat", "das Hauptgericht"],
+["m1", "le dessert", "der Nachtisch"],
+["m1", "les légumes", "das Gemüse"],
+["m1", "le potiron", "der Kürbis"],
+["m1", "la carotte", "die Karotte, die Möhre"],
+["m1", "la tomate", "die Tomate"],
+["m1", "la salade", "der Salat"],
+["m1", "les fruits", "das Obst, die Früchte"],
+["m1", "la pomme", "der Apfel"],
+["m1", "le pain", "das Brot"],
+["m1", "le riz", "der Reis"],
+["m1", "le gâteau aux pommes", "der Apfelkuchen"],
+["m1", "le gâteau au chocolat", "der Schokoladenkuchen"],
+["m1", "le steak", "das Steak"],
+["m1", "le poisson", "der Fisch"],
+["m1", "la viande", "das Fleisch"],
+["m1", "les spaghettis", "die Spaghetti"],
+["m1", "le gratin", "das Gratin"],
+["m1", "la soupe", "die Suppe"],
+["m1", "la pizza", "die Pizza"],
+["m1", "comme ça", "so"],
+["m1", "C’est comme ça.", "So ist das (nun einmal)."],
+["m1", "orange", "orange"],
+["2a", "le piquenique", "das Picknick"],
+["2a", "le festival", "das Festival"],
+["2a", "le marché", "der Markt"],
+["2a", "au bord de qc", "am Ufer von etw."],
+["2t", "la liste", "die Liste"],
+["2t", "les courses", "die Einkäufe"],
+["2t", "la liste des courses", "die Einkaufsliste"],
+["2t", "le sucre", "der Zucker"],
+["2t", "le jus", "der Saft"],
+["2t", "le miel", "der Honig"],
+["2t", "le jambon", "der Schinken"],
+["2t", "la farine", "das Mehl"],
+["2t", "le biscuit", "der Keks"],
+["2t", "les chips", "die Kartoffelchips"],
+["2t", "la pomme", "der Apfel"],
+["2t", "la pomme de terre", "die Kartoffel, der Erdapfel"],
+["2t", "la boisson", "das Getränk"],
+["2t", "il faut qc", "man braucht etw.; wir brauchen etw."],
+["2t", "le poivre", "der Pfeffer"],
+["2t", "le lait", "die Milch"],
+["2t", "le coca", "die Cola"],
+["2t", "le beurre", "die Butter"],
+["2t", "le fromage", "der Käse"],
+["2t", "la crème", "die Crème fraîche, die Sahne"],
+["2t", "l’œuf / les œufs", "das Ei; Eier"],
+["2t", "la banane", "die Banane"],
+["2t", "la fraise", "die Erdbeere"],
+["2t", "l’orange", "die Orange, die Apfelsine"],
+["2v1", "passer chez qn", "bei jdm. vorbeikommen"],
+["2v1", "vouloir qc", "etw. wollen"],
+["2v1", "vouloir + infinitif", "etw. tun wollen"],
+["2v1", "le film", "der Film"],
+["2v1", "je voudrais + infinitif", "ich möchte gerne etw. tun"],
+["2v1", "À quelle heure ?", "Um wie viel Uhr?"],
+["2v1", "On se retrouve…", "Wir treffen uns …"],
+["2v1", "pouvoir", "können"],
+["2v1", "pouvoir + infinitif", "etw. tun können"],
+["2v1", "appeler qn", "jdn. anrufen"],
+["2v1", "l’idée", "die Idee"],
+["2v1", "Bonne idée !", "Gute Idee!"],
+["2v1", "Attends !", "Warte!"],
+["2v1", "ce weekend", "an diesem Wochenende"],
+["2v1", "l’atelier", "der Workshop, das Atelier"],
+["2v1", "le hip-hop", "der Hip-Hop"],
+["2v1", "C’est cher.", "Das ist teuer."],
+["2v1", "C’est trop cher !", "Das ist zu teuer!"],
+["2v1", "gratuit / gratuite", "kostenlos, gratis"],
+["2v1", "le spectacle", "die Show, die Vorstellung"],
+["2v1", "l’électro", "die Elektromusik"],
+["2v1", "ne … pas trop", "nicht so sehr, nicht so gern"],
+["2v1", "préférer qc", "etw. bevorzugen"],
+["2v1", "préférer + infinitif", "etw. lieber tun"],
+["2v1", "le jardin", "der Garten"],
+["2v1", "Ça te dit ?", "Hast du Lust?"],
+["2v1", "Ça vous dit ?", "Habt ihr Lust?"],
+["2v1", "Ça marche !", "Geht klar."],
+["2v1", "passer", "verbringen"],
+["2v1", "quelque chose", "etwas"],
+["2v1", "quelqu’un", "jemand"],
+["2v2", "faire les courses", "einkaufen (Lebensmittel)"],
+["2v2", "la baguette", "das Baguette"],
+["2v2", "le sandwich", "das Sandwich"],
+["2v2", "acheter qc", "etw. kaufen"],
+["2v2", "Et avec ça ?", "Und außerdem?; Darf es sonst noch etwas sein?"],
+["2v2", "C’est tout.", "Das ist alles."],
+["2v2", "ça fait", "das macht"],
+["2v2", "Ça fait combien ?", "Wie viel macht das?"],
+["2v2", "Ça coûte combien ?", "Wie viel kostet das?"],
+["2v2", "combien… ?", "wie viel …?"],
+["2v2", "l’euro", "der Euro"],
+["2v2", "le centime", "der Cent"],
+["2v2", "l’argent", "das Geld"],
+["2v2", "Combien de… ?", "Wie viel(e) …?"],
+["2v2", "la bouteille", "die Flasche"],
+["2v2", "le paquet", "das Paket, die Packung"],
+["2v2", "le kilo", "das Kilo"],
+["2v2", "le gramme", "das Gramm"],
+["2v2", "sucré / sucrée", "süß, gezuckert"],
+["2v2", "salé / salée", "salzig, gesalzen"],
+["2v2", "C’est quoi ?", "Was ist das?"],
+["2v3", "la recette", "das Rezept"],
+["2v3", "la cuisine", "die Küche, auch: das Kochen"],
+["2v3", "faire la cuisine", "kochen"],
+["2v3", "la pâte", "der Teig"],
+["2v3", "la levure", "die Hefe"],
+["2v3", "la température", "die Temperatur"],
+["2v3", "le four", "der (Back-)Ofen"],
+["2v3", "chaud / chaude", "warm, heiß"],
+["2v3", "froid / froide", "kalt"],
+["2v3", "le secret", "das Geheimnis"],
+["2v3", "le site (web)", "die (Web-)Seite"],
+["2v3", "la chimie", "die Chemie"],
+["2v3", "la forme", "die Form, die Gestalt"],
+["2v3", "un exemple", "ein Beispiel"],
+["2v3", "intéressant / intéressante", "interessant"],
+["m2", "Il fait quel temps ?", "Wie ist das Wetter?"],
+["m2", "Il fait beau.", "Es ist schön."],
+["m2", "Il fait chaud.", "Es ist warm."],
+["m2", "Il fait froid.", "Es ist kalt."],
+["m2", "Il fait … degrés.", "Es ist/hat … Grad."],
+["m2", "le degré", "das Grad (Celsius)"],
+["m2", "Il pleut.", "Es regnet."],
+["m2", "Il neige.", "Es schneit."],
+["m2", "le soleil", "die Sonne"],
+["m2", "Il y a du soleil.", "Es ist sonnig."],
+["m2", "la glace", "das Eis"],
+["m2", "la piscine", "das Schwimmbad"],
+["m2", "la plage", "der Strand"],
+["m2", "la mer", "das Meer"],
+["m2", "la montagne", "der Berg, das Gebirge"],
+["m2", "dehors", "draußen"],
+["m2", "la balade", "der Spaziergang"],
+["m2", "le VTT", "das Mountainbike"],
+["m2", "le tour", "die Tour"],
+["m2", "le vélo", "das Fahrrad"],
+["m2", "le portable", "das Handy"],
+["m2", "arriver", "ankommen"],
+["m2", "bientôt", "bald"],
+["m2", "rentrer", "zurückkommen, nach Hause gehen/fahren"],
+["m2", "tard", "spät"],
+["m2", "rester", "bleiben"],
+["m2", "la carte postale", "die Postkarte"],
+["m2", "cher / chère", "liebe/-r als Anrede, sonst: teuer"],
+["m2", "j’espère que…", "ich hoffe, dass …"],
+["m2", "C’est génial !", "Das ist toll!; Das ist genial!"],
+["m2", "facile", "einfach"],
+["m2", "À bientôt !", "Bis bald!"],
+["m2", "le bisou", "das Küsschen"],
+["m2", "Bisous !", "Küsschen!"],
+["m2", "plein de", "viele"],
+["m2", "d’abord", "zuerst"],
+["m2", "après", "danach"],
+["m2", "longtemps", "lange"],
+["m2", "c’est l’heure de qc", "es ist Zeit für etw."],
+["m2", "quand", "wenn, immer wenn"],
+["m2", "le jour", "der Tag, tagsüber, am Tag"],
+["m2", "le soir", "der Abend, abends, am Abend"],
+["m2", "la journée", "der Tag in seinem Verlauf"],
+["m2", "la soirée", "der Abend in seinem Verlauf"],
+["m2", "T’inquiète !", "Keinen Stress!"],
+["m2", "Ne t’inquiète pas !", "Mach dir keine Sorgen!"],
+["m2", "le rêve", "der Traum"],
+["m2", "faire du vélo", "Fahrrad fahren"],
+["m2", "faire du cheval", "reiten"],
+["m2", "faire une randonnée", "wandern"],
+["m2", "faire du beach-volley", "Beach-Volleyball spielen"],
+["m2", "faire du ski", "Ski fahren"],
+["m2", "faire de la trottinette", "rollern"],
+["m2", "faire des selfies", "Selfies machen"],
+["m2", "faire du shopping", "shoppen gehen"],
+["m2", "chiller", "chillen"],
+["3t", "présenter qn/qc", "jdn./etw. vorstellen"],
+["3t", "un port", "ein Hafen"],
+["3t", "un monument", "ein Bauwerk, ein Denkmal"],
+["3t", "un carrefour", "eine Kreuzung"],
+["3t", "un centre-ville", "ein Stadtzentrum"],
+["3t", "une maison", "ein Haus"],
+["3t", "un bâtiment", "ein Gebäude"],
+["3t", "une œuvre d’art", "ein Kunstwerk"],
+["3t", "une place", "ein Platz"],
+["3t", "une île", "eine Insel"],
+["3t", "un skatepark", "ein Skatepark"],
+["3t", "un fleuve", "ein Fluss"],
+["3t", "un pont", "eine Brücke"],
+["3t", "un château / des châteaux", "ein Schloss; Schlösser"],
+["3t", "un tram", "eine Straßenbahn"],
+["3t", "un arrêt", "eine Haltestelle, ein Halt"],
+["3t", "une rue piétonne", "eine Fußgängerzone"],
+["3t", "se trouver", "sich befinden, liegen"],
+["3t", "traverser qc", "etw. durchqueren, etw. überqueren"],
+["3t", "qui (relatif)", "der, die, das"],
+["3t", "la machine", "die Maschine"],
+["3t", "un hôpital", "ein Krankenhaus"],
+["3t", "une église", "eine Kirche"],
+["3t", "une piscine découverte", "ein Freibad"],
+["3t", "un lac", "ein See"],
+["3t", "une forêt", "ein Wald"],
+["3t", "une salle de concert", "ein Konzertsaal"],
+["3t", "la mairie", "das Rathaus"],
+["3t", "une fontaine", "ein Springbrunnen"],
+["3t", "la vieille ville", "die Altstadt"],
+["3v1", "le voyage", "die Reise"],
+["3v1", "extraordinaire", "außergewöhnlich"],
+["3v1", "le parcours", "der Rundgang, die Strecke"],
+["3v1", "où (relatif)", "wo"],
+["3v1", "sortir", "ausgehen, rausgehen"],
+["3v1", "partir", "losgehen, wegfahren"],
+["3v1", "le bateau / les bateaux", "das Schiff, das Boot"],
+["3v1", "partir en weekend", "über das Wochenende wegfahren"],
+["3v1", "l’auteur / l’auteure", "der/die Autor/-in"],
+["3v1", "célèbre", "berühmt"],
+["3v1", "il est né / elle est née", "er ist geboren; sie ist geboren"],
+["3v1", "la spécialité", "die Spezialität"],
+["3v1", "moderne", "modern"],
+["3v1", "l’arbre", "der Baum"],
+["3v1", "ils/elles se trouvent", "sie befinden sich, sie liegen"],
+["3v1", "sur", "über"],
+["3v1", "le/la jeune", "der/die Jugendliche"],
+["3v1", "chiller", "chillen"],
+["3v1", "faire du pingpong", "Tischtennis spielen"],
+["3v1", "le pingpong", "Tischtennis"],
+["3v1", "la chaine", "der Kanal"],
+["3v1", "avoir une chaine", "einen Kanal haben"],
+["3v2", "prendre à gauche", "links abbiegen"],
+["3v2", "prendre à droite", "rechts abbiegen"],
+["3v2", "continuer", "weitergehen, weiterlaufen"],
+["3v2", "tout droit", "geradeaus"],
+["3v2", "quel / quelle / quels / quelles", "welcher/welche/welches, was für ein/-e"],
+["3v2", "deuxième", "zweiter/zweite/zweites"],
+["3v2", "première rue", "erste Straße"],
+["3v2", "deuxième rue", "zweite Straße"],
+["3v2", "troisième rue", "dritte Straße"],
+["3v2", "jusqu’à", "bis"],
+["3v2", "important / importante", "wichtig"],
+["3v2", "venir", "kommen"],
+["3v2", "beaucoup de monde", "viele Leute"],
+["3v2", "le/la touriste", "der/die Tourist/-in"],
+["3v2", "le nom", "der Name, der Nachname"],
+["3v2", "la couleur", "die Farbe"],
+["3v2", "la hauteur", "die Höhe"],
+["3v2", "la longueur", "die Länge"],
+["3v2", "le mètre", "der Meter"],
+["3v2", "vrai / vraie", "wahr, richtig, echt"],
+["3v2", "C’est vrai ?", "Stimmt das?"],
+["3v2", "Oui, c’est vrai.", "Ja, das stimmt."],
+["3v2", "À vous, maintenant !", "Jetzt seid ihr dran!"],
+["3v2", "marcher", "gehen, laufen, auch: funktionieren"],
+["3v2", "Ça marche !", "Das klappt!; Das funktioniert!"],
+["3v2", "la fin", "das Ende, der Schluss"],
+["3v2", "non ?", "oder?, nicht wahr?"],
+["3v3", "la voie", "das Gleis"],
+["3v3", "le train", "der Zug"],
+["3v3", "le billet", "das Ticket"],
+["3v3", "le sac à dos", "der Rucksack"],
+["3v3", "la valise", "der Koffer"],
+["3v3", "le quai", "der Bahnsteig"],
+["3v3", "le départ", "die Abfahrt"],
+["3v3", "l’annonce", "die Durchsage, auch: die Anzeige"],
+["3v3", "la minute", "die Minute"],
+["3v3", "répéter qc", "etw. wiederholen"],
+["3v3", "attendre (qn/qc)", "(auf jdn./etw.) warten"],
+["3v3", "pour", "nach"],
+["3v3", "Allez !", "Los!; Kommt schon!"],
+["3v3", "Allez, c’est parti !", "Kommt schon, los geht’s!"],
+["3v3", "On y va !", "Los geht’s!; Wir gehen dahin!"],
+["3v3", "rater qn/qc", "jdn./etw. verpassen"],
+["3v3", "ne … pas encore", "noch nicht"],
+["3v3", "il faut + infinitif", "man muss/wir müssen etw. tun"],
+["3v3", "descendre", "aussteigen, auch: hinuntergehen"],
+["3v3", "il ne faut pas + infinitif", "man darf/sollte etw. nicht tun, wir dürfen/sollten etw. nicht tun"],
+["3v3", "le message", "die Nachricht"],
+["3v3", "répondre (à qn)", "(jdm.) antworten"],
+["3v3", "la batterie", "der Akku"],
+["3v3", "Zut !", "Mist!"],
+["3v3", "content / contente", "zufrieden, froh"],
+["m3", "Est-ce que je peux ouvrir la fenêtre ?", "Kann ich das Fenster öffnen?"],
+["m3", "Est-ce que je peux lire la phrase ?", "Kann ich den Satz lesen?"],
+["m3", "lire (qc)", "(etw.) lesen"],
+["m3", "la tablette", "das Tablet"],
+["m3", "les écouteurs", "die Kopfhörer"],
+["m3", "C’est à qui ?", "Wer ist dran?"],
+["m3", "C’est à moi.", "Ich bin dran."],
+["m3", "la page", "die Seite"],
+["m3", "C’est à quelle page ?", "Auf welcher Seite ist das?"],
+["m3", "l’exercice", "die Übung"],
+["m3", "le numéro", "die Nummer"],
+["m3", "Qu’est-ce qu’il faut faire ?", "Was sollen wir machen?"],
+["m3", "en groupe", "in der Gruppe"],
+["m3", "Vous avez fini ?", "Seid ihr fertig?; Sind Sie fertig?"],
+["m3", "Non, pas encore.", "Nein, noch nicht."],
+["m3", "le contrôle", "die Leistungskontrolle"],
+["m3", "avoir un contrôle", "eine Leistungskontrolle schreiben"],
+["m3", "le vocabulaire", "das Vokabular, der Wortschatz"],
+["m3", "apprendre qc", "etw. lernen"],
+["m3", "l’unité", "die Lektion"],
+["m3", "corriger qc", "etw. korrigieren, etw. berichtigen"],
+["m3", "Ça y est !", "So!, Es ist soweit!"],
+["4a", "le tour", "die Reise, die Rundfahrt"],
+["4a", "l’aventure", "das Abenteuer"],
+["4t", "faire une excursion", "einen Ausflug machen"],
+["4t", "l’excursion", "der Ausflug"],
+["4t", "faire la fête", "feiern"],
+["4t", "faire plein de trucs", "viele Sachen machen"],
+["4t", "plein de", "viel, viele"],
+["4t", "aller en ville", "in die Stadt gehen"],
+["4t", "en ville", "in die Stadt, in der Stadt"],
+["4t", "partir tôt", "früh losgehen"],
+["4t", "tôt", "früh"],
+["4t", "danser", "tanzen"],
+["4t", "chanter une chanson", "ein Lied singen"],
+["4t", "chanter", "singen"],
+["4t", "la chanson", "das Lied"],
+["4t", "composer une chanson", "ein Lied komponieren"],
+["4t", "composer qc", "etw. komponieren"],
+["4t", "jouer au foot", "Fußball spielen"],
+["4t", "jouer aux boules", "Boule spielen"],
+["4t", "les boules", "Boule, das Boulespiel"],
+["4t", "jouer de la guitare", "Gitarre spielen"],
+["4t", "jouer à un jeu", "ein Spiel spielen"],
+["4t", "jouer d’un instrument", "ein Instrument spielen"],
+["4t", "jouer à un jeu de société", "ein Gesellschaftsspiel spielen"],
+["4t", "jouer au babyfoot", "Tischkicker spielen"],
+["4t", "jouer aux échecs", "Schach spielen"],
+["4t", "jouer aux cartes", "Karten spielen"],
+["4t", "jouer au tennis", "Tennis spielen"],
+["4t", "jouer au handball", "Handball spielen"],
+["4t", "jouer au hockey", "Hockey spielen"],
+["4t", "jouer au badminton", "Badminton spielen"],
+["4t", "jouer du violon", "Geige spielen"],
+["4t", "jouer de la trompette", "Trompete spielen"],
+["4t", "jouer de la flute (traversière)", "(Quer-)Flöte spielen"],
+["4t", "jouer de la batterie", "Schlagzeug spielen"],
+["4v1", "l’aventurier / l’aventurière", "der Abenteurer; die Abenteurerin"],
+["4v1", "l’artiste", "der/die Künstler/-in"],
+["4v1", "français / française", "französisch"],
+["4v1", "utiliser qc", "etw. benutzen"],
+["4v1", "le héros", "der Held"],
+["4v1", "l’héroïne", "die Heldin"],
+["4v1", "le roman", "der Roman"],
+["4v1", "en (+ Jahreszahl)", "im Jahr"],
+["4v1", "l’année", "das Jahr in seinem Verlauf"],
+["4v1", "gagner qc", "etw. gewinnen"],
+["4v1", "le prix / les prix", "der Preis"],
+["4v1", "gagner un prix", "einen Preis gewinnen"],
+["4v1", "à … ans", "mit … Jahren"],
+["4v1", "la passion", "die Leidenschaft"],
+["4v1", "voyager", "reisen"],
+["4v1", "le pays", "das Land"],
+["4v1", "le monde", "die Welt"],
+["4v1", "faire le tour du monde", "eine Weltreise machen"],
+["4v1", "inventer qc", "etw. erfinden"],
+["4v1", "imiter qn/qc", "jdn. nachahmen, etw. nachmachen"],
+["4v1", "surtout", "vor allem"],
+["4v1", "seulement", "nur (noch), erst"],
+["4v1", "la tête", "der Kopf"],
+["4v1", "la dent", "der Zahn"],
+["4v1", "le centimètre", "der Zentimeter"],
+["4v2", "avant", "vor"],
+["4v2", "au début de", "am Anfang von"],
+["4v2", "et puis", "außerdem"],
+["4v2", "tout à coup", "plötzlich"],
+["4v2", "finalement", "schließlich"],
+["4v2", "tout le temps", "die ganze Zeit, ständig"],
+["4v2", "monter", "steigen, hinaufsteigen, ansteigen"],
+["4v2", "avoir peur", "Angst haben"],
+["4v2", "tomber", "fallen, hinfallen"],
+["4v2", "avoir mal", "sich weh tun, Schmerzen haben"],
+["4v2", "c’était", "das war, es war"],
+["4v2", "l’aviron", "das Rudern"],
+["4v2", "faire de l’aviron", "rudern"],
+["4l", "le matin", "der Morgen, morgens"],
+["4l", "à midi", "mittags"],
+["4l", "l’après-midi", "der Nachmittag, nachmittags"],
+["4l", "le soir", "der Abend, abends"],
+["4l", "la nuit", "die Nacht, nachts"],
+["4l", "hier", "gestern"],
+["4l", "aujourd’hui", "heute"],
+["4l", "demain", "morgen"],
+["4l", "rencontrer qn", "jdn. kennenlernen, jdm. begegnen"],
+["4l", "retrouver qn", "jdn. treffen, jdn. wiederfinden"],
+["4l", "retourner", "zurückkehren"],
+["4l", "au milieu (de qc)", "in der Mitte (von etw.), mitten in"],
+["4l", "la route", "die Landstraße"],
+["4l", "la rue", "die Straße (in der Stadt)"],
+["4l", "le bus", "der Bus"],
+["4l", "crier", "schreien"],
+["4l", "la surprise", "die Überraschung"],
+["4l", "comprendre qn/qc", "jdn./etw. verstehen"],
+["4l", "tout de suite", "sofort"],
+["4l", "la pause", "die Pause"],
+["4l", "après", "nach"],
+["4l", "ramasser qc", "etw. (auf)sammeln"],
+["m4", "l’homme", "der Mann"],
+["m4", "la femme", "die Frau, die Ehefrau"],
+["m4", "puissant / puissante", "mächtig"],
+["m4", "le/la chef", "der/die Chef/-in"],
+["m4", "devenir", "werden"],
+["m4", "la meilleure", "die beste"],
+["m4", "le meilleur", "der beste"],
+["m4", "l’Europe", "Europa"],
+["m4", "l’ouest", "der Westen"],
+["m4", "le village", "das Dorf"],
+["m4", "rapide", "schnell"],
+["m4", "rouler", "fahren, rollen"],
+["m4", "vite", "schnell"],
+["m4", "impressionnant / impressionnante", "beeindruckend"],
+["m4", "haut / haute", "hoch"],
+["m4", "court / courte", "kurz"],
+["m4", "long / longue", "lang"],
+["m4", "le kilomètre", "der Kilometer"],
+["m4", "le record", "der Rekord"],
+["m4", "plus … que", "mehr … als"],
+["m4", "aussi … que", "(genau) so … wie"],
+["m4", "moins … que", "weniger … als, nicht so … wie"],
+["m4", "meilleur / meilleure que", "besser als"],
+["m4", "l’or", "das Gold"],
+["m4", "l’argent", "das Silber"]
 ].map(([unit,fr,de],id)=>({id,unit:String(unit),fr,de}));
 const vocab9F=[["1a","le projet","der Plan; das Vorhaben; das Projekt"],["1a","le métier","der Beruf"],["1a","le domaine","das Gebiet; der Bereich"],["1a","la technologie","die Technologie"],["1a","la santé","die Gesundheit"],["1a","l’alimentation (f.)","die Ernährung; der Lebensmittelhandel"],["1a","l’art (m.)","die Kunst"],["1a","l’éducation (f.)","die Erziehung; die Bildung"],["1t","réfléchir (à qc)","über etw. nachdenken"],["1t","professionnel / professionnelle","beruflich; professionell"],["1t","autonome","selbstständig"],["1t","être assis / assise","sitzen"],["1t","la main","die Hand"],["1t","s’organiser","sich organisieren"],["1t","la formation","die Ausbildung"],["1t","une entreprise","ein Unternehmen"],["1t","utile","nützlich"],["1t","un horaire","eine Uhrzeit; ein Zeitplan; ein Fahrplan"],["1t","flexible","flexibel"],["1t","s’occuper de qn/qc","sich um jdn./etw. kümmern"],["1t","la responsabilité","die Verantwortung"],["1t","dangereux / dangereuse","gefährlich"],["1t","s’adapter (à qc)","sich (an etw.) anpassen"],["1t","la situation","die Situation"],["1t","être doué / douée","begabt sein"],["1v1","le conseiller / la conseillère d’orientation","der Berufsberater; die Berufsberaterin"],["1v1","(n’avoir) aucune idée (de qc)","(von etw.) keine Ahnung (haben)"],["1v1","ne … aucun / aucune","gar kein; gar keine"],["1v1","plaire (à qn)","(jdm.) gefallen"],["1v1","le petit boulot","der Nebenjob"],["1v1","garder qn/qc","auf jdn./etw. aufpassen"],["1v1","le stage","das Praktikum"],["1v1","on dirait (que)","es sieht so aus, als ob; es scheint so"],["1v1","supporter qn/qc","jdn./etw. ertragen"],["1v1","un homme","ein Mann; ein Mensch"],["1v1","handicapé / handicapée","behindert"],["1v1","le contact","der Kontakt"],["1v1","faire du bien (à qn/qc)","(jdm./etw.) guttun"],["1v1","intéresser qn","jdn. interessieren"],["1v1","un avantage","ein Vorteil"],["1v1","un inconvénient","ein Nachteil"],["1v1","être prêt / prête (à + inf.)","bereit sein (etw. zu tun)"],["1v1","un éducateur / une éducatrice","der Erzieher; die Erzieherin"],["1v1","un infirmier / une infirmière","der Krankenpfleger; die Krankenpflegerin"],["1v1","se renseigner sur qn/qc","sich über jdn./etw. informieren"],["1v1","aller (à qn / avec qc)","(jdm./zu etw.) passen"],["1v1","la qualité","die Qualität; die gute Eigenschaft"],["1v1","envoyer qc à qn","jdm. etw. schicken"],["1v1","le rendez-vous","das Treffen; der Termin"],["1v2","forcément","zwangsläufig"],["1v2","depuis que","seit; seitdem"],["1v2","nettoyer qc","etw. putzen"],["1v2","faire peur (à qn)","(jdm.) Angst machen"],["1v2","au contraire","im Gegenteil"],["1v2","poser sa candidature (pour qc)","sich (auf etw.) bewerben"],["1v2","physiquement","körperlich"],["1v2","ne … que","nur; erst"],["1v2","prouver qc (à qn)","(jdm.) etw. beweisen"],["1v2","le robot","der Roboter"],["1v2","de plus en plus","immer mehr"],["1v2","programmer qc","etw. programmieren"],["1v2","l’informatique (f.)","die Informatik"],["1v2","se spécialiser (dans qc)","sich (auf etw.) spezialisieren"],["1v2","sauver qn/qc","jdn./etw. retten"],["1v2","rater qc","etw. verpassen; bei etw. durchfallen"],["1v2","un examen","eine Prüfung"],["1v2","motivé / motivée","motiviert"],["1v2","le début","der Anfang; der Beginn"],["1v2","permettre (à qn) de + inf.","(jdm.) erlauben; (jdm.) ermöglichen, etw. zu tun"],["1v2","la lune","der Mond"],["1v2","le nombre","die Anzahl; die Zahl"],["2a","le mode de vie","die Lebensweise"],["2a","le lycée","das Gymnasium; die gymnasiale Oberstufe"],["2a","un hôpital / des hôpitaux","ein Krankenhaus"],["2a","la banlieue","die Vorstadt; der Vorort"],["2a","la campagne","das Land; die ländliche Gegend"],["2a","les transports en commun","die öffentlichen Verkehrsmittel"],["2a","triste","traurig"],["2a","agressif / agressive","aggressiv"],["2a","donner envie (à qn) de + inf.","(jdm.) Lust machen, etw. zu tun"],["2a","empêcher qn/qc de + inf.","jdn./etw. daran hindern, etw. zu tun"],["2a","mentir (à qn)","(jdn.) anlügen"],["2a","se moquer de qn/qc","sich über jdn./etw. lustig machen"],["2t","un effet","eine Wirkung; ein Effekt"],["2t","mettre qn en colère","jdn. ärgern; jdn. wütend machen"],["2t","déranger qn","jdn. stören"],["2t","surprendre qn","jdn. überraschen; jdn. erstaunen"],["2t","être égal à qn","jdm. egal sein"],["2t","influencer qn","jdn. beeinflussen"],["2t","faire (+ inf.)","jdn. etw. tun lassen"],["2t","rire","lachen"],["2t","pleurer","weinen"],["2t","rendre qn/qc (+ adj.)","jdn./etw. machen; bewirken, dass ..."],["2t","espérer que","hoffen, dass"],["2t","moderniser qc","etw. modernisieren"],["2t","arrêter de + inf.","aufhören, etw. zu tun"],["2t","faux / fausse","falsch"],["2t","libre","frei"],["2t","la mobylette","das Mofa"],["2t","ailleurs","woanders; woandershin"],["2t","être à table","am Esstisch sitzen; bei Tisch sein"],["2t","stressé / stressée","gestresst"],["2t","sentir qc","etw. riechen; etw. schmecken"],["2v1","les quatre coins","alle Ecken"],["2v1","voici","hier ist; hier sind"],["2v1","le vent","der Wind"],["2v1","prochain / prochaine","nächster; nächste; nächstes"],["2v1","spécial / spéciale / spéciaux / spéciales","besonders; speziell"],["2v1","le produit","das Produkt; die Ware"],["2v1","produire qc","etw. produzieren; etw. herstellen"],["2v1","se plaindre (de qn/qc)","sich (über jdn./etw.) beschweren"],["2v1","un immeuble","ein Wohnhaus; ein Gebäude"],["2v1","pauvre","arm"],["2v1","riche","reich"],["2v1","la réputation","der Ruf; das Ansehen"],["2v1","tous / toutes","alle"],["2v1","un étage","ein Stockwerk; eine Etage"],["2v1","se passer","geschehen; passieren; sich ereignen"],["2v2","la pub / la publicité","die Werbung; die Werbeanzeige; der Werbespot"],["2v2","la marque","die Marke"],["2v2","pousser qn à + inf.","jdn. zu etw. drängen"],["2v2","le consommateur / la consommatrice","der Verbraucher; die Verbraucherin"],["2v2","décoder qc","etw. entschlüsseln"],["2v2","séduire qn/qc","jdn. verführen; für sich einnehmen"],["2v2","la terre","der Boden; die Erde; die Welt"],["2v2","associer qn/qc à qn/qc","jdn./etw. mit jdm./etw. verbinden"],["2v2","le slogan","der Slogan"],["2v2","croire qn/qc","jdm./etw. glauben"],["2v2","le label","das Label; das Siegel"],["2v2","se laver","sich waschen"],["2v2","le logo","das Logo"],["2v2","à la fois","zugleich; auf einmal"],["3a","l’énergie (f.)","die Energie; die Kraft"],["3a","économique","wirtschaftlich"],["3a","soutenir qn/qc","jdn./etw. unterstützen"],["3a","le chômage","die Arbeitslosigkeit"],["3a","un élément","ein Element"],["3a","la manière (de + inf.)","die Art (etw. zu tun)"],["3a","attirer l’attention (de qn sur qn/qc)","Aufmerksamkeit erregen; die Aufmerksamkeit lenken"],["3a","le jeu de mots","das Wortspiel"],["3a","le Maroc","Marokko"],["3a","le désert","die Wüste"],["3a","la vallée","das Tal"],["3a","le souk","der Basar"],["3a","la côte","die Küste"],["3a","le panneau solaire","das Solarmodul; das Fotovoltaikmodul"],["3t","le royaume","das Königreich"],["3t","l’Afrique (f.)","Afrika"],["3t","la population","die Bevölkerung"],["3t","amazigh","berberisch"],["3t","arabe","arabisch"],["3t","le protectorat","das Protektorat; das Schutzgebiet"],["3t","occuper qc","etw. besetzen"],["3t","le pouvoir","die Macht; die Fähigkeit"],["3t","indépendant / indépendante","unabhängig"],["3t","la réforme","die Reform"],["3t","une ONG","eine Nichtregierungsorganisation"],["3t","la loi","das Gesetz"],["3t","la religion","die Religion"],["3t","la majorité","die Mehrheit"],["3t","musulman / musulmane","muslimisch"],["3t","juif / juive","jüdisch"],["3t","chrétien / chrétienne","christlich"],["3t","historique","historisch; geschichtlich"],["3t","le tiers","das Drittel"],["3t","la moitié","die Hälfte"],["3t","l’agriculture (f.)","die Landwirtschaft"],["3t","le tourisme","der Tourismus"],["3v1","un aéroport","ein Flughafen"],["3v1","avoir hâte (de + inf.)","es kaum erwarten können"],["3v1","venir chercher qn/qc","jdn./etw. abholen kommen"],["3v1","avoir le temps (de + inf.)","Zeit haben (etw. zu tun)"],["3v1","la mosquée","die Moschee"],["3v1","le palais","der Palast"],["3v1","pendant que","während; solange"],["3v1","boire qc","etw. trinken"],["3v1","le thé","der Tee"],["3v1","la menthe","die Minze"],["3v1","avoir du mal à + inf.","Schwierigkeiten haben, etw. zu tun"],["3v1","imaginer qc","sich etw. vorstellen"],["3v1","accueillir qn","jdn. empfangen; jdn. aufnehmen"],["3v1","marchander (qc)","handeln; verhandeln"],["3v1","la lampe","die Lampe"],["3v1","le cheval / les chevaux","das Pferd"],["3v1","il s’agit de","es handelt sich um; es geht um"],["3v1","le toit","das Dach"],["3v1","le meuble","das Möbelstück"],["3v1","agréable","angenehm"],["3v2","sec / sèche","trocken"],["3v2","ocre","ocker; erdfarben"],["3v2","le palmier","die Palme"],["3v2","la chaleur","die Hitze"],["3v2","grâce à","dank"],["3v2","cultiver qc","etw. anbauen"],["3v2","la datte","die Dattel"],["3v2","une olive","eine Olive"],["3v2","le blé","der Weizen"],["3v2","les remparts","die Festungsmauer; die Stadtmauer"],["3v2","la caravane","die Karawane"],["3v2","le commerce","der Handel"],["3v2","avant de + inf.","vor; bevor"],["3v2","le voleur / la voleuse","der Dieb; die Diebin"],["3v2","au-dessus (de qn/qc)","darüber; über jdm./etw."],["3v2","en dessous (de qn/qc)","darunter; unter jdm./etw."],["3v2","par hasard","zufällig"],["3v2","le décor","die Kulisse"],["3v2","tourner (qc)","etw. drehen"],["3v2","la clim / la climatisation","die Klimaanlage"]].map(([unit,fr,de],id)=>({id,unit,fr,de}));
 const trainers = {'7F':createTrainer('7F',vocab7F),'9F':createTrainer('9F',vocab9F)};
