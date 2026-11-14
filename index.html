@@ -550,6 +550,66 @@ button.bilan-export.secondary::before {
   background: #f0eee8;
 }
 
+.vocabulary-entry { text-align: center; padding: 0 16px 4px; }
+.vocabulary-entry button { font-size: .8rem; padding: 7px 12px; }
+.vocabulary-dialog {
+  position: fixed; inset: 0; margin: 0; padding: 0;
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  border: 0; color: inherit; background: #f4f7f5; overflow: auto;
+  overscroll-behavior: contain;
+}
+body:has(.vocabulary-dialog[open]) { overflow: hidden; }
+.vocabulary-toolbar {
+  position: sticky; top: 0; z-index: 1;
+  border-bottom: 1px solid #cbdcd3; background: #f4f7f5;
+}
+.vocabulary-toolbar-inner, .vocabulary-content {
+  width: min(100%, 840px); margin-inline: auto; padding: 14px 16px;
+}
+.vocabulary-heading {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  align-items: center; gap: 8px 16px; margin-bottom: 10px;
+}
+.vocabulary-heading h2 { margin: 0; font-size: clamp(1rem, 3vw, 1.45rem); }
+.vocabulary-heading button { padding: 8px 12px; font-size: .85rem; }
+.vocabulary-filter {
+  position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr;
+  width: min(100%, 470px); margin: 0; padding: 3px;
+  border: 1px solid #b8cbc5; border-radius: 14px; background: #e3ebe6;
+}
+.vocabulary-filter::before {
+  content: ""; position: absolute; z-index: -1; inset: 3px auto 3px 3px;
+  width: calc(50% - 3px); border-radius: 10px; background: #315e51;
+  transition: transform .18s ease;
+}
+.vocabulary-filter:has(input[value="selected"]:checked)::before { transform: translateX(100%); }
+.vocabulary-filter label {
+  position: relative; display: grid; place-items: center; min-height: 42px;
+  padding: 6px; text-align: center; cursor: pointer;
+}
+.vocabulary-filter input { position: absolute; opacity: 0; width: 1px; height: 1px; padding: 0; }
+.vocabulary-filter label:has(input:checked) { color: white; }
+.vocabulary-filter label:has(input:focus-visible) { outline: 2px solid #bd810e; border-radius: 10px; }
+.vocabulary-content { padding-bottom: 34px; }
+.vocabulary-unit { margin-bottom: 18px; }
+.vocabulary-unit h3 {
+  margin: 0 0 7px; padding: 8px 12px; border-radius: 8px;
+  color: #284b3e; background: #e2ece6; font-size: 1rem;
+}
+.vocabulary-unit details {
+  margin-bottom: 6px; border: 1px solid #d5e1da; border-radius: 8px; background: white;
+}
+.vocabulary-unit summary { padding: 9px 12px; cursor: pointer; font-weight: 700; }
+.vocabulary-unit table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.vocabulary-unit th, .vocabulary-unit td {
+  padding: 8px 12px; text-align: start; vertical-align: top; overflow-wrap: anywhere;
+  border-top: 1px solid #e1e9e4;
+}
+.vocabulary-unit th { background: #f3f7f4; }
+@media (prefers-reduced-motion: reduce) {
+  .vocabulary-filter::before { transition: none; }
+}
+
 </style>
 
 </head>
@@ -592,6 +652,24 @@ button.bilan-export.secondary::before {
   </button><div class="flashcard-ratings"><button id="9F-known" class="flashcard-known hidden" data-de="Gewusst ✓" data-fr="Je savais ✓">Je savais ✓</button><button id="9F-unknown" class="flashcard-review hidden" data-de="Noch üben ↻" data-fr="À revoir ↻">À revoir ↻</button></div></div><div class="feedback" id="9F-feedback" aria-live="polite"></div><button id="9F-next" class="hidden" data-de="Weiter →" data-fr="Suivant →">Suivant →</button></section></section>
   <p class="footer" data-de="Dein Fortschritt gilt für diese Sitzung." data-fr="Ta progression est conservée pendant cette session.">Ta progression est conservée pendant cette session.</p>
 </main>
+<div class="vocabulary-entry">
+  <button id="open-vocabulary" class="secondary" type="button" aria-haspopup="dialog" data-de="Vokabellisten" data-fr="Listes de vocabulaire">Listes de vocabulaire</button>
+</div>
+<dialog id="vocabulary-dialog" class="vocabulary-dialog" aria-labelledby="vocabulary-title">
+  <header class="vocabulary-toolbar">
+    <div class="vocabulary-toolbar-inner">
+      <div class="vocabulary-heading">
+        <h2 id="vocabulary-title"></h2>
+        <button id="close-vocabulary" class="secondary" type="button" autofocus data-de="Liste schließen" data-fr="Fermer la liste">Fermer la liste</button>
+      </div>
+      <fieldset class="vocabulary-filter" data-aria-de="Umfang der Vokabelliste" data-aria-fr="Contenu de la liste de vocabulaire">
+        <label><input type="radio" name="vocabulary-filter" value="all" checked><span data-de="Alle Vokabeln" data-fr="Tout le vocabulaire">Tout le vocabulaire</span></label>
+        <label><input type="radio" name="vocabulary-filter" value="selected"><span data-de="Nur ausgewählte Kapitel" data-fr="Uniquement les chapitres sélectionnés">Uniquement les chapitres sélectionnés</span></label>
+      </fieldset>
+    </div>
+  </header>
+  <div id="vocabulary-content" class="vocabulary-content"></div>
+</dialog>
 <footer class="mini-impressum">Krämer · Kurpfalz-Internat · Diersteinstraße 1–7 · 69245 Bammental</footer>
 <script>
 'use strict';
@@ -1720,6 +1798,24 @@ $('chapter-apply').onclick = () => {
  if (changed) start();
 };
 
+function matchesChapter(word, chapter) {
+ return chapter === 'all' || word.unit === chapter ||
+  (chapter.length === 1 && word.unit.startsWith(chapter));
+}
+
+function vocabularySections(filtered) {
+ const words = filtered ? vocab.filter(word => appliedChapters.some(chapter => matchesChapter(word, chapter))) : vocab;
+ return [...$('unit').children].filter(node => !node.querySelector('input[value="all"]')).flatMap(node => {
+  const legend = node.querySelector('legend');
+  const chapters = [...node.querySelectorAll('input')].map(input => ({
+   key: input.value,
+   label: input.nextElementSibling.textContent,
+   words: words.filter(word => word.unit === input.value)
+  })).filter(chapter => chapter.words.length);
+  return chapters.length ? [{title: legend?.textContent ?? chapters[0].label, chapters}] : [];
+ });
+}
+
 function chapterLabel(word) {
  const input = $('unit').querySelector(`input[value="${word.unit}"]`);
  if (!input) return word.unit;
@@ -1728,7 +1824,7 @@ function chapterLabel(word) {
  return unit ? unit.querySelector('legend').textContent + ' · ' + label : label;
 }
 
-function start(){updateChapterCaption();$('missed').disabled=mode==='duel'||mode==='blitz';$('duel').hidden=true;$('letters').hidden=true;syncDirectionControl();stopMemoryTimer();$('memory-time').classList.add('hidden');chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;const units = appliedChapters; let pool=vocab.filter(w=>units.some(u=>u==='all'||w.unit===u||(u.length===1&&w.unit.startsWith(u)))&&(!reviewingMissed()||missed.has(w.id)));deck=shuffle(pool);if(mode==='letters')deck=deck.filter(word=>/\p{L}/u.test(word.fr)).slice(0,10);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${reviewingMissed()?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${reviewingMissed()?' (à revoir)':''}`));if(mode==='memory')initMemory();else if(mode==='duel')initDuel();else if(mode==='letters')startLettersWord();else if(mode==='blitz')renderBlitzLauncher();else render();if(mode==='challenge'&&deck.length)beginChrono()}
+function start(){updateChapterCaption();$('missed').disabled=mode==='duel'||mode==='blitz';$('duel').hidden=true;$('letters').hidden=true;syncDirectionControl();stopMemoryTimer();$('memory-time').classList.add('hidden');chronoEnded=false;memoryRound++;$('memory-board').classList.add('hidden');$('choices').classList.remove('hidden');stopChrono();resetAllConfirmations();if(sessionEnd)return;const units = appliedChapters; let pool=vocab.filter(w=>units.some(u=>matchesChapter(w,u))&&(!reviewingMissed()||missed.has(w.id)));deck=shuffle(pool);if(mode==='letters')deck=deck.filter(word=>/\p{L}/u.test(word.fr)).slice(0,10);pos=0;correct=0;answered=false;setText('count',tr(`${pool.length} Vokabeln verfügbar${reviewingMissed()?' (Fehlerliste)':''}`,`${pool.length} mots disponibles${reviewingMissed()?' (à revoir)':''}`));if(mode==='memory')initMemory();else if(mode==='duel')initDuel();else if(mode==='letters')startLettersWord();else if(mode==='blitz')renderBlitzLauncher();else render();if(mode==='challenge'&&deck.length)beginChrono()}
 function render(){
  const status=$('status'), game=$('game');
  if(!deck.length){
@@ -1828,7 +1924,7 @@ function translate() {
   if (mode==='challenge') updateChrono(false);
 }
 start();
-return {translate};
+return {translate, vocabularySections};
 
 }
 
@@ -2429,6 +2525,68 @@ const vocab7F=[
 ].map(([unit,fr,de],id)=>({id,unit:String(unit),fr,de}));
 const vocab9F=[["1a","le projet","der Plan; das Vorhaben; das Projekt"],["1a","le métier","der Beruf"],["1a","le domaine","das Gebiet; der Bereich"],["1a","la technologie","die Technologie"],["1a","la santé","die Gesundheit"],["1a","l’alimentation (f.)","die Ernährung; der Lebensmittelhandel"],["1a","l’art (m.)","die Kunst"],["1a","l’éducation (f.)","die Erziehung; die Bildung"],["1t","réfléchir (à qc)","über etw. nachdenken"],["1t","professionnel / professionnelle","beruflich; professionell"],["1t","autonome","selbstständig"],["1t","être assis / assise","sitzen"],["1t","la main","die Hand"],["1t","s’organiser","sich organisieren"],["1t","la formation","die Ausbildung"],["1t","une entreprise","ein Unternehmen"],["1t","utile","nützlich"],["1t","un horaire","eine Uhrzeit; ein Zeitplan; ein Fahrplan"],["1t","flexible","flexibel"],["1t","s’occuper de qn/qc","sich um jdn./etw. kümmern"],["1t","la responsabilité","die Verantwortung"],["1t","dangereux / dangereuse","gefährlich"],["1t","s’adapter (à qc)","sich (an etw.) anpassen"],["1t","la situation","die Situation"],["1t","être doué / douée","begabt sein"],["1v1","le conseiller / la conseillère d’orientation","der Berufsberater; die Berufsberaterin"],["1v1","(n’avoir) aucune idée (de qc)","(von etw.) keine Ahnung (haben)"],["1v1","ne … aucun / aucune","gar kein; gar keine"],["1v1","plaire (à qn)","(jdm.) gefallen"],["1v1","le petit boulot","der Nebenjob"],["1v1","garder qn/qc","auf jdn./etw. aufpassen"],["1v1","le stage","das Praktikum"],["1v1","on dirait (que)","es sieht so aus, als ob; es scheint so"],["1v1","supporter qn/qc","jdn./etw. ertragen"],["1v1","un homme","ein Mann; ein Mensch"],["1v1","handicapé / handicapée","behindert"],["1v1","le contact","der Kontakt"],["1v1","faire du bien (à qn/qc)","(jdm./etw.) guttun"],["1v1","intéresser qn","jdn. interessieren"],["1v1","un avantage","ein Vorteil"],["1v1","un inconvénient","ein Nachteil"],["1v1","être prêt / prête (à + inf.)","bereit sein (etw. zu tun)"],["1v1","un éducateur / une éducatrice","der Erzieher; die Erzieherin"],["1v1","un infirmier / une infirmière","der Krankenpfleger; die Krankenpflegerin"],["1v1","se renseigner sur qn/qc","sich über jdn./etw. informieren"],["1v1","aller (à qn / avec qc)","(jdm./zu etw.) passen"],["1v1","la qualité","die Qualität; die gute Eigenschaft"],["1v1","envoyer qc à qn","jdm. etw. schicken"],["1v1","le rendez-vous","das Treffen; der Termin"],["1v2","forcément","zwangsläufig"],["1v2","depuis que","seit; seitdem"],["1v2","nettoyer qc","etw. putzen"],["1v2","faire peur (à qn)","(jdm.) Angst machen"],["1v2","au contraire","im Gegenteil"],["1v2","poser sa candidature (pour qc)","sich (auf etw.) bewerben"],["1v2","physiquement","körperlich"],["1v2","ne … que","nur; erst"],["1v2","prouver qc (à qn)","(jdm.) etw. beweisen"],["1v2","le robot","der Roboter"],["1v2","de plus en plus","immer mehr"],["1v2","programmer qc","etw. programmieren"],["1v2","l’informatique (f.)","die Informatik"],["1v2","se spécialiser (dans qc)","sich (auf etw.) spezialisieren"],["1v2","sauver qn/qc","jdn./etw. retten"],["1v2","rater qc","etw. verpassen; bei etw. durchfallen"],["1v2","un examen","eine Prüfung"],["1v2","motivé / motivée","motiviert"],["1v2","le début","der Anfang; der Beginn"],["1v2","permettre (à qn) de + inf.","(jdm.) erlauben; (jdm.) ermöglichen, etw. zu tun"],["1v2","la lune","der Mond"],["1v2","le nombre","die Anzahl; die Zahl"],["2a","le mode de vie","die Lebensweise"],["2a","le lycée","das Gymnasium; die gymnasiale Oberstufe"],["2a","un hôpital / des hôpitaux","ein Krankenhaus"],["2a","la banlieue","die Vorstadt; der Vorort"],["2a","la campagne","das Land; die ländliche Gegend"],["2a","les transports en commun","die öffentlichen Verkehrsmittel"],["2a","triste","traurig"],["2a","agressif / agressive","aggressiv"],["2a","donner envie (à qn) de + inf.","(jdm.) Lust machen, etw. zu tun"],["2a","empêcher qn/qc de + inf.","jdn./etw. daran hindern, etw. zu tun"],["2a","mentir (à qn)","(jdn.) anlügen"],["2a","se moquer de qn/qc","sich über jdn./etw. lustig machen"],["2t","un effet","eine Wirkung; ein Effekt"],["2t","mettre qn en colère","jdn. ärgern; jdn. wütend machen"],["2t","déranger qn","jdn. stören"],["2t","surprendre qn","jdn. überraschen; jdn. erstaunen"],["2t","être égal à qn","jdm. egal sein"],["2t","influencer qn","jdn. beeinflussen"],["2t","faire (+ inf.)","jdn. etw. tun lassen"],["2t","rire","lachen"],["2t","pleurer","weinen"],["2t","rendre qn/qc (+ adj.)","jdn./etw. machen; bewirken, dass ..."],["2t","espérer que","hoffen, dass"],["2t","moderniser qc","etw. modernisieren"],["2t","arrêter de + inf.","aufhören, etw. zu tun"],["2t","faux / fausse","falsch"],["2t","libre","frei"],["2t","la mobylette","das Mofa"],["2t","ailleurs","woanders; woandershin"],["2t","être à table","am Esstisch sitzen; bei Tisch sein"],["2t","stressé / stressée","gestresst"],["2t","sentir qc","etw. riechen; etw. schmecken"],["2v1","les quatre coins","alle Ecken"],["2v1","voici","hier ist; hier sind"],["2v1","le vent","der Wind"],["2v1","prochain / prochaine","nächster; nächste; nächstes"],["2v1","spécial / spéciale / spéciaux / spéciales","besonders; speziell"],["2v1","le produit","das Produkt; die Ware"],["2v1","produire qc","etw. produzieren; etw. herstellen"],["2v1","se plaindre (de qn/qc)","sich (über jdn./etw.) beschweren"],["2v1","un immeuble","ein Wohnhaus; ein Gebäude"],["2v1","pauvre","arm"],["2v1","riche","reich"],["2v1","la réputation","der Ruf; das Ansehen"],["2v1","tous / toutes","alle"],["2v1","un étage","ein Stockwerk; eine Etage"],["2v1","se passer","geschehen; passieren; sich ereignen"],["2v2","la pub / la publicité","die Werbung; die Werbeanzeige; der Werbespot"],["2v2","la marque","die Marke"],["2v2","pousser qn à + inf.","jdn. zu etw. drängen"],["2v2","le consommateur / la consommatrice","der Verbraucher; die Verbraucherin"],["2v2","décoder qc","etw. entschlüsseln"],["2v2","séduire qn/qc","jdn. verführen; für sich einnehmen"],["2v2","la terre","der Boden; die Erde; die Welt"],["2v2","associer qn/qc à qn/qc","jdn./etw. mit jdm./etw. verbinden"],["2v2","le slogan","der Slogan"],["2v2","croire qn/qc","jdm./etw. glauben"],["2v2","le label","das Label; das Siegel"],["2v2","se laver","sich waschen"],["2v2","le logo","das Logo"],["2v2","à la fois","zugleich; auf einmal"],["3a","l’énergie (f.)","die Energie; die Kraft"],["3a","économique","wirtschaftlich"],["3a","soutenir qn/qc","jdn./etw. unterstützen"],["3a","le chômage","die Arbeitslosigkeit"],["3a","un élément","ein Element"],["3a","la manière (de + inf.)","die Art (etw. zu tun)"],["3a","attirer l’attention (de qn sur qn/qc)","Aufmerksamkeit erregen; die Aufmerksamkeit lenken"],["3a","le jeu de mots","das Wortspiel"],["3a","le Maroc","Marokko"],["3a","le désert","die Wüste"],["3a","la vallée","das Tal"],["3a","le souk","der Basar"],["3a","la côte","die Küste"],["3a","le panneau solaire","das Solarmodul; das Fotovoltaikmodul"],["3t","le royaume","das Königreich"],["3t","l’Afrique (f.)","Afrika"],["3t","la population","die Bevölkerung"],["3t","amazigh","berberisch"],["3t","arabe","arabisch"],["3t","le protectorat","das Protektorat; das Schutzgebiet"],["3t","occuper qc","etw. besetzen"],["3t","le pouvoir","die Macht; die Fähigkeit"],["3t","indépendant / indépendante","unabhängig"],["3t","la réforme","die Reform"],["3t","une ONG","eine Nichtregierungsorganisation"],["3t","la loi","das Gesetz"],["3t","la religion","die Religion"],["3t","la majorité","die Mehrheit"],["3t","musulman / musulmane","muslimisch"],["3t","juif / juive","jüdisch"],["3t","chrétien / chrétienne","christlich"],["3t","historique","historisch; geschichtlich"],["3t","le tiers","das Drittel"],["3t","la moitié","die Hälfte"],["3t","l’agriculture (f.)","die Landwirtschaft"],["3t","le tourisme","der Tourismus"],["3v1","un aéroport","ein Flughafen"],["3v1","avoir hâte (de + inf.)","es kaum erwarten können"],["3v1","venir chercher qn/qc","jdn./etw. abholen kommen"],["3v1","avoir le temps (de + inf.)","Zeit haben (etw. zu tun)"],["3v1","la mosquée","die Moschee"],["3v1","le palais","der Palast"],["3v1","pendant que","während; solange"],["3v1","boire qc","etw. trinken"],["3v1","le thé","der Tee"],["3v1","la menthe","die Minze"],["3v1","avoir du mal à + inf.","Schwierigkeiten haben, etw. zu tun"],["3v1","imaginer qc","sich etw. vorstellen"],["3v1","accueillir qn","jdn. empfangen; jdn. aufnehmen"],["3v1","marchander (qc)","handeln; verhandeln"],["3v1","la lampe","die Lampe"],["3v1","le cheval / les chevaux","das Pferd"],["3v1","il s’agit de","es handelt sich um; es geht um"],["3v1","le toit","das Dach"],["3v1","le meuble","das Möbelstück"],["3v1","agréable","angenehm"],["3v2","sec / sèche","trocken"],["3v2","ocre","ocker; erdfarben"],["3v2","le palmier","die Palme"],["3v2","la chaleur","die Hitze"],["3v2","grâce à","dank"],["3v2","cultiver qc","etw. anbauen"],["3v2","la datte","die Dattel"],["3v2","une olive","eine Olive"],["3v2","le blé","der Weizen"],["3v2","les remparts","die Festungsmauer; die Stadtmauer"],["3v2","la caravane","die Karawane"],["3v2","le commerce","der Handel"],["3v2","avant de + inf.","vor; bevor"],["3v2","le voleur / la voleuse","der Dieb; die Diebin"],["3v2","au-dessus (de qn/qc)","darüber; über jdm./etw."],["3v2","en dessous (de qn/qc)","darunter; unter jdm./etw."],["3v2","par hasard","zufällig"],["3v2","le décor","die Kulisse"],["3v2","tourner (qc)","etw. drehen"],["3v2","la clim / la climatisation","die Klimaanlage"]].map(([unit,fr,de],id)=>({id,unit,fr,de}));
 const trainers = {'7F':createTrainer('7F',vocab7F),'9F':createTrainer('9F',vocab9F)};
+let activeClass;
+const vocabularyDialog = document.getElementById('vocabulary-dialog');
+const vocabularyTrigger = document.getElementById('open-vocabulary');
+const vocabularyContent = document.getElementById('vocabulary-content');
+const vocabularyFilter = vocabularyDialog.querySelector('.vocabulary-filter');
+function renderVocabulary() {
+  const {group, trainer} = activeClass;
+  const filtered = vocabularyFilter.querySelector('input[value="selected"]').checked;
+  document.getElementById('vocabulary-title').textContent =
+    tr('Vokabellisten', 'Listes de vocabulaire') + ' · ' + group;
+
+  const expanded = new Set([...vocabularyContent.querySelectorAll('details[open]')].map(el => el.dataset.chapter));
+  const sections = [];
+  for (const {title, chapters} of trainer.vocabularySections(filtered)) {
+    const section = document.createElement('section');
+    section.className = 'vocabulary-unit';
+    const heading = document.createElement('h3');
+    heading.textContent = title;
+    section.append(heading);
+    for (const {key, label, words} of chapters) {
+      const chapter = document.createElement('details');
+      chapter.dataset.chapter = key;
+      chapter.open = expanded.has(key);
+      const summary = document.createElement('summary');
+      summary.textContent = label;
+      const table = document.createElement('table');
+      table.setAttribute('aria-label', title + ' · ' + label);
+      const header = table.createTHead().insertRow();
+      for (const label of [tr('Französisch', 'Français'), tr('Deutsch', 'Allemand')]) {
+        const cell = document.createElement('th');
+        cell.scope = 'col';
+        cell.textContent = label;
+        header.append(cell);
+      }
+      const rows = table.createTBody();
+      for (const word of words) {
+        const row = rows.insertRow();
+        for (const lang of ['fr', 'de']) {
+          const cell = row.insertCell();
+          cell.lang = lang;
+          cell.textContent = word[lang];
+        }
+      }
+      chapter.append(summary, table);
+      section.append(chapter);
+    }
+    sections.push(section);
+  }
+  vocabularyContent.replaceChildren(...sections);
+}
+
+vocabularyTrigger.onclick = () => {
+  vocabularyFilter.querySelector('input[value="all"]').checked = true;
+  vocabularyContent.replaceChildren();
+  renderVocabulary();
+  vocabularyDialog.showModal();
+  vocabularyDialog.scrollTop = 0;
+};
+document.getElementById('close-vocabulary').onclick = () => vocabularyDialog.close();
+vocabularyDialog.addEventListener('close', () => vocabularyTrigger.focus({preventScroll: true}));
+vocabularyFilter.addEventListener('change', renderVocabulary);
+
 function applyLanguage() {
   document.documentElement.lang=language;
   document.title=tr('Vokabeltrainer · 7F und 9F','Atelier de vocabulaire · 7F et 9F');
@@ -2440,8 +2598,11 @@ function applyLanguage() {
   document.querySelectorAll('[data-aria-de]').forEach(el=>el.setAttribute('aria-label',tr(el.dataset.ariaDe,el.dataset.ariaFr)));
   document.querySelectorAll('[data-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.language===language)));
   Object.values(trainers).forEach(trainer=>trainer.translate());
+  if (vocabularyDialog.open) renderVocabulary();
 }
 function showClass(group) {
+  activeClass = {group, trainer: trainers[group]};
+  if (vocabularyDialog.open) renderVocabulary();
   for (const name of Object.keys(trainers)) {
     document.getElementById('class-'+name).hidden=name!==group;
     document.getElementById('tab-'+name).setAttribute('aria-current',name===group?'page':'false');
