@@ -478,6 +478,32 @@ button.bilan-button:disabled {
   .blitz-actions button { max-width: 36vw; }
 }
 
+.bilan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+button.bilan-export { margin-inline-start: 0; }
+button.bilan-export.secondary::before {
+  flex-basis: 1.05em;
+  height: .78em;
+  border-radius: 3px;
+  background: radial-gradient(circle at center, transparent 0 .15em, currentColor .16em .22em, transparent .23em);
+}
+.bilan-image-preview {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.bilan-image-preview img {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+}
+
 </style>
 
 </head>
@@ -1389,6 +1415,123 @@ function requireSecondClick(button,firstLabel,confirmationLabel,confirmationClas
 function confirmSummary(button){requireSecondClick(button,'Session beenden und Zusammenfassung erstellen',tr('Sicher ?','Confirmer ?'),'confirm-green',showSessionSummary)}
 function resetSession(){stopChrono();resetAllConfirmations();sessionStart=new Date();sessionEnd=null;$('sessionSummary').disabled=false;sessionCounts={choice:0,cards:0,challenge:0,memory:0,duel:0,letters:0,blitz:0};sessionWords.clear();memoryRecord=null;chronoRecord=null;duelHistory.length=0;blitzHistory.length=0;blitzUsed.clear();lettersCorrect=0;missed.clear();$('missed').setAttribute('aria-pressed','false');updateMissedCount();start()}
 function confirmNewSession(button){requireSecondClick(button,'Neue Session starten',tr('Sicher? Zusammenfassung geht verloren!','Confirmer ? Le bilan sera perdu !'),'confirm-red',resetSession)}
+function bilanImage(summary) {
+ const canvas = document.createElement('canvas');
+ const context = canvas.getContext('2d');
+ const width = 860;
+ const margin = 42;
+ const contentWidth = width - 2 * margin;
+ const navy = '#14293f';
+ const green = '#3e6d5d';
+ const font = (size, weight) => `${weight} ${size}px system-ui, sans-serif`;
+ const commands = [];
+ let y = 38;
+
+ function paragraph(text, size, weight = 400, color = navy) {
+  const type = font(size, weight);
+  context.font = type;
+  const lines = [];
+  let line = '';
+  for (const word of text.split(/\s+/)) {
+   const candidate = line ? `${line} ${word}` : word;
+   if (line && context.measureText(candidate).width > contentWidth) {
+    lines.push(line);
+    line = word;
+   } else {
+    line = candidate;
+   }
+  }
+  if (line) lines.push(line);
+  for (const value of lines) {
+   const top = y;
+   commands.push(() => {
+    context.font = type;
+    context.fillStyle = color;
+    context.fillText(value, margin, top);
+   });
+   y += size + 9;
+  }
+  y += 12;
+ }
+
+ paragraph(`Kurpfalz-Internat · Krämer · ${group}`, 17, 650, green);
+ for (const block of summary) {
+  if (block.tagName !== 'TABLE') {
+   const isTitle = block.tagName === 'H2';
+   const isNote = block.classList.contains('hint');
+   paragraph(block.textContent, isTitle ? 34 : isNote ? 16 : 20, isTitle ? 700 : 400, isNote ? '#526058' : navy);
+   continue;
+  }
+
+  [...block.rows].forEach((row, index) => {
+   const [label, count] = [...row.cells].map(cell => cell.textContent);
+   const top = y;
+   commands.push(() => {
+    context.fillStyle = index === 0 ? '#dce9e3' : index % 2 ? '#f0f5f2' : '#f8fbf9';
+    context.fillRect(margin, top, contentWidth, 43);
+    context.font = font(20, index === 0 ? 650 : 400);
+    context.fillStyle = navy;
+    context.fillText(label, margin + 15, top + 9);
+    context.textAlign = 'right';
+    context.fillText(count, width - margin - 15, top + 9);
+    context.textAlign = 'left';
+   });
+   y += 43;
+  });
+  y += 23;
+ }
+
+ canvas.width = width * 2;
+ canvas.height = (y + 22) * 2;
+ context.scale(2, 2);
+ context.textBaseline = 'top';
+ context.fillStyle = '#fff';
+ context.fillRect(0, 0, width, y + 22);
+ commands.forEach(draw => draw());
+ return canvas.toDataURL('image/png');
+}
+
+function showBilanImage(preview, url, filename) {
+ const hint = document.createElement('p');
+ hint.textContent = tr('Halte das Bild gedrückt, um es in Fotos zu sichern. Du kannst es auch herunterladen.', 'Appuie longuement sur l’image pour l’enregistrer dans Photos. Tu peux aussi la télécharger.');
+ const image = document.createElement('img');
+ image.alt = tr('Zusammenfassung deiner Session', 'Bilan de ta session');
+ image.src = url;
+ const download = document.createElement('a');
+ download.href = url;
+ download.download = filename;
+ download.textContent = tr('PNG herunterladen', 'Télécharger le PNG');
+ preview.replaceChildren(hint, image, download);
+ preview.hidden = false;
+ preview.scrollIntoView({block: 'nearest'});
+}
+
+async function exportBilan(summary, preview, button) {
+ button.disabled = true;
+ try {
+  const url = bilanImage(summary);
+  const date = sessionEnd.toLocaleDateString('sv-SE');
+  const filename = `Bilan-${group}-${date}.png`;
+  const bytes = Uint8Array.from(atob(url.split(',')[1]), character => character.charCodeAt(0));
+  const file = new File([bytes], filename, {type: 'image/png'});
+  if (navigator.share && navigator.canShare?.({files: [file]})) {
+   try {
+    // Call share within the tap handler while Safari still grants user activation.
+    await navigator.share({files: [file]});
+    return;
+   } catch (error) {
+    if (error.name === 'AbortError') return;
+   }
+  }
+  if (preview.isConnected) showBilanImage(preview, url, filename);
+ } catch {
+  preview.textContent = tr('Das Bild konnte nicht erstellt werden.', 'Impossible de créer l’image.');
+  preview.hidden = false;
+ } finally {
+  button.disabled = false;
+ }
+}
+
 function showSessionSummary(refresh=false){
  if(!refresh){stopChrono();stopMemoryTimer()}
  if(sessionEnd&&!refresh)return;
@@ -1440,7 +1583,21 @@ function showSessionSummary(refresh=false){
   );
   status.append(lettersResult);
  }
- status.append(info,note,btn);
+ status.append(info,note);
+ const summary = [...status.children];
+ const actions = document.createElement('div');
+ actions.className = 'bilan-actions';
+ const preview = document.createElement('div');
+ preview.className = 'bilan-image-preview';
+ preview.hidden = true;
+ preview.setAttribute('aria-live', 'polite');
+ const save = document.createElement('button');
+ save.type = 'button';
+ save.className = 'secondary bilan-button bilan-export';
+ save.textContent = tr('Zusammenfassung als Bild speichern', 'Enregistrer le bilan en image');
+ save.onclick = () => exportBilan(summary, preview, save);
+ actions.append(btn, save);
+ status.append(actions, preview);
 }
 $('sessionSummary').onclick=()=>confirmSummary($('sessionSummary'));
 
